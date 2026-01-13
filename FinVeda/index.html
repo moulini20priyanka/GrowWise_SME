@@ -228,10 +228,7 @@
       document.getElementById("progressBar").style.width = scrolled + "%";
     };
   </script>
-  <div class="search-container">
-    <input type="text" class="search-bar" placeholder="  Search...">
-    <button class="search-button">🔍</button>
-</div>
+ 
 
 <style>
 .search-container {
@@ -351,6 +348,7 @@
   <div id="preloader">
     <div id="lottie-loader"></div>
   </div>
+
   <div class="content-wrapper">
     <header class="header-area">
       <div style="display: flex; justify-content: center;" class="navbar-area">
@@ -405,7 +403,7 @@
                     <li class="nav-item no-underline" id="auth-btn-container">
                       <a class="main-btn navbar-btn"
                         style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;"
-                        data-scroll-nav="0" href="./loginPage.html">Login/Register 💻</a>
+                        data-scroll-nav="0" href="./loginPage.html">Login/Register</a>
                     </li>
 
                     <li class="nav-item no-underline">
@@ -435,7 +433,7 @@
                       });
                     } else {
                       // Show Login/Register button if user is not logged in
-                      authBtnContainer.innerHTML = `<a class="main-btn navbar-btn" style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;" data-scroll-nav="0" href="./loginPage.html">Login/Register 💻</a>`;
+                      authBtnContainer.innerHTML = `<a class="main-btn navbar-btn" style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;" data-scroll-nav="0" href="./loginPage.html">Login/Register </a>`;
                     }
                   }
 
@@ -1418,8 +1416,8 @@
       <!-- About -->
       <div class="col-lg-4 col-md-6 col-sm-8">
         <div class="footer-about mt-50 ml-45 wow fadeIn" data-wow-duration="1s">
-          <img src="./assets/images/FinvedaLogo.png" alt="FinVeda Logo"
-            style="height:80px; margin-bottom:15px;" />
+          <img src="./assets/images/Growwise.png" alt="SME Logo"
+            style="height:70px; margin-bottom:10px;" />
           <p class="text custom-margin">
             GrowWise sme provides AI-powered financial learning and insights.
           </p>
@@ -1611,7 +1609,7 @@
           event.preventDefault();
           loginModal.style.display = "none";
           registerModal.style.display = "block";
-          document.title = "Login/Register - FinVeda";  // Update title when registering
+          document.title = "Login/Register - GrowWise SME";  // Update title when registering
         });
 
         // Event listener for the login link
@@ -1619,7 +1617,7 @@
           event.preventDefault();
           registerModal.style.display = "none";
           loginModal.style.display = "block";
-          document.title = "Login/Register - FinVeda";  // Update title when logging in
+          document.title = "Login/Register - GrowWise SME";  // Update title when logging in
         });
 
         // Close button event listeners for modals

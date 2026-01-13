@@ -14,7 +14,7 @@ input {
 .container {
   position: relative;
   width: 100%;
-  background-color: #54c5c9;
+  background-color: #60a5fa;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -62,14 +62,14 @@ form.sign-in-form {
 
 .title {
   font-size: 2.2rem;
-  color: #444;
+  color: #1e293b;
   margin-bottom: 10px;
 }
 
 .input-field {
   max-width: 380px;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #f0f9ff;
   margin: 10px 0;
   height: 55px;
   border-radius: 55px;
@@ -82,7 +82,7 @@ form.sign-in-form {
 .input-field i {
   text-align: center;
   line-height: 55px;
-  color: #acacac;
+  color: #1e293b;
   transition: 0.5s;
   font-size: 1.1rem;
 }
@@ -94,17 +94,18 @@ form.sign-in-form {
   line-height: 1;
   font-weight: 600;
   font-size: 1.1rem;
-  color: #333;
+  color: #1e293b;
 }
 
 .input-field input::placeholder {
-  color: #aaa;
+  color: #1e293b;
   font-weight: 500;
 }
 
 .social-text {
   padding: 0.7rem 0;
   font-size: 1rem;
+  color: #1e293b;
 }
 
 .social-media {
@@ -113,12 +114,11 @@ form.sign-in-form {
   align-items: center;
 }
 
-
 .social-icon-frame {
   display: inline-flex; 
   justify-content: center;
   align-items: center;
-  border: 2px solid #333;
+  border: 2px solid #1e293b;
   border-radius: 50%; 
   padding: 15px; 
   margin: 5px; 
@@ -134,19 +134,18 @@ form.sign-in-form {
 
 .social-icon {
   font-size: 22px; 
-  color: inherit; 
+  color: #1e293b;
   transition: none; 
 }
 
-
 .btn {
   width: 150px;
-  background-color: #000000;
+  background-color: #1e40af;
   border: none;
   outline: none;
   height: 49px;
   border-radius: 49px;
-  color: #fff;
+  color: #f0f9ff;
   text-transform: uppercase;
   font-weight: 600;
   margin: 10px 0;
@@ -155,7 +154,7 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-color: #4d84e2;
+  background-color: #3b82f6;
 }
 
 .panels-container {
@@ -176,7 +175,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #000000 0%, #000000 100%);
+  background-image: linear-gradient(-45deg, #1e40af 3%, #3b82f6 90%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -207,7 +206,7 @@ form.sign-in-form {
 }
 
 .panel .content {
-  color: #fff;
+  color: #f0f9ff;
   transition: transform 0.9s ease-in-out;
   transition-delay: 0.6s;
 }
@@ -226,11 +225,16 @@ form.sign-in-form {
 .btn.transparent {
   margin: 0;
   background: none;
-  border: 2px solid #fff;
+  border: 2px solid #f0f9ff;
   width: 130px;
   height: 41px;
   font-weight: 600;
   font-size: 0.8rem;
+  color: #f0f9ff;
+}
+
+.btn.transparent:hover {
+  background-color: rgba(240, 249, 255, 0.1);
 }
 
 .right-panel .image,
@@ -413,8 +417,8 @@ form.sign-in-form {
   position: absolute;
   top: 20px;
   left: 20px;
-  background: #ffffff;
-  color: #000000;
+  background: #f0f9ff;
+  color: #1e293b;
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
@@ -423,22 +427,22 @@ form.sign-in-form {
 }
 
 .homeBtn:hover {
-  background: #232323;
+  background: #1e293b;
 }
 
 .homeBtn:hover i {
-  color: white;
+  color: #f0f9ff;
 }
 
 .homeBtn:active {
-  background: #191919;
+  background: #1e293b;
 }
 
 .circle {
   height: 35px;
   width: 35px;
   border-radius: 24px;
-  background-color: black;
+  background-color: #1e293b;
   position: fixed;
   top: 0;
   left: 0;
@@ -446,21 +450,19 @@ form.sign-in-form {
   z-index: 99999999;
 }
 
-
 .forgot-password {
   text-align: right;
   margin: 10px 0;
 }
 
 .forgot-password a {
-  color: black;
+  color: #1e293b;
   text-decoration: underline;
   transition: color 0.3s;
-
 }
 
 .forgot-password a:hover {
-  color: blue;
+  color: #1e40af;
 }
 
 .input-field {
@@ -470,7 +472,6 @@ form.sign-in-form {
 }
 
 .input-field input {
-  
   padding: 10px;
   flex-grow: 1;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -481,12 +482,9 @@ form.sign-in-form {
 }
 
 .input-field input:focus {
-
-  outline: 
-  none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-
+  outline: none;
+  border-color: #1e40af;
+  box-shadow: 0 0 5px rgba(30, 64, 175, 0.5);
 }
 
 .btn {
