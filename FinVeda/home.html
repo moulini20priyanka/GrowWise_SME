@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GrowWise - Investor Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ✅ Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+
+<style>
+  body { font-family: 'Inter', sans-serif; background: #f8fafd; margin: 0; color: #333; }
+
+  .header-area { background-color: #000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; color: #fff; }
+  .header-area h1 { margin: 0; font-size: 1.8rem; }
+  .logout-btn { background: #f76b45; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 25px; cursor: pointer; font-size: 0.9rem; }
+  .logout-btn:hover { background: #e55a34; }
+
+  main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+
+  /* Profile Card */
+  .profile-card { background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 2rem; display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; }
+  .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1976d2, #42a5f5); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; flex-shrink: 0; font-weight: 700; }
+  .profile-info h2 { margin: 0 0 0.3rem 0; font-size: 1.5rem; color: #1976d2; }
+  .profile-info .badge { display: inline-block; background: #e3f2fd; color: #1976d2; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; font-weight: 600; margin-bottom: 0.8rem; }
+  .profile-details { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .detail-item { display: flex; flex-direction: column; }
+  .detail-item label { font-size: 0.75rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
+  .detail-item span { font-size: 0.95rem; font-weight: 600; color: #333; margin-top: 0.2rem; }
+
+  /* Section Title */
+  .section-title { font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #1976d2; border-left: 4px solid #1976d2; padding-left: 0.75rem; }
+
+  /* Loading */
+  .loading-state { text-align: center; padding: 2rem; background: #fff; border-radius: 12px; color: #999; }
+  .loading-spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid #e3f2fd; border-top-color: #1976d2; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Request Cards */
+  .request-card { background: #fff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 1.2rem; border-left: 4px solid #1976d2; }
+  .request-card h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #333; }
+  .request-card p { color: #555; line-height: 1.5; margin: 0.5rem 0; }
+  .request-meta { font-size: 0.82rem; color: #999; margin-bottom: 0.8rem; }
+  .status-badge { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-left: 0.5rem; }
+  .status-Pending  { background: #fff3e0; color: #e65100; }
+  .status-Accepted { background: #e8f5e9; color: #2e7d32; }
+  .status-Declined { background: #ffebee; color: #c62828; }
+  .action-btns { margin-top: 0.8rem; display: flex; gap: 0.5rem; }
+  .acceptBtn  { background: #4CAF50; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 500; }
+  .acceptBtn:hover  { background: #388e3c; }
+  .declineBtn { background: #f44336; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 500; }
+  .declineBtn:hover { background: #c62828; }
+
+  .no-requests { text-align: center; padding: 3rem; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); color: #999; font-size: 1.1rem; }
+
+  @media (max-width: 600px) {
+    .profile-card { flex-direction: column; text-align: center; }
+    .profile-details { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header-area">
+  <h1>GrowWise</h1>
+  <button class="logout-btn" onclick="logout()">Logout 🚪</button>
+</header>
+
+<main>
+
+  <div class="section-title">My Profile</div>
+  <div class="profile-card" id="profileCard">
+    <div class="profile-avatar" id="profileAvatar">👤</div>
+    <div class="profile-info">
+      <h2 id="profileName">—</h2>
+      <div class="badge">Investor</div>
+      <div class="profile-details">
+        <div class="detail-item"><label>Email</label><span id="profileEmail">—</span></div>
+        <div class="detail-item"><label>Investment Range</label><span id="profileRange">—</span></div>
+        <div class="detail-item"><label>Preferred Sector</label><span id="profileSector">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Requests from SMEs</div>
+  <div id="requestList">
+    <div class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading requests...</p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // ── Firebase Init ──
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZV532N9_KYTuIuH5oG606Qpqhc0lG7no",
+    authDomain: "smeproj-c54b4.firebaseapp.com",
+    projectId: "smeproj-c54b4",
+    storageBucket: "smeproj-c54b4.app",
+    messagingSenderId: "415550648607",
+    appId: "1:415550648607:web:741b6ba5854391f60a402a"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // ── Load profile from localStorage ──
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+
+  const profileName = currentUser.name || currentUser.username || '—';
+  document.getElementById('profileName').textContent   = profileName;
+  document.getElementById('profileAvatar').textContent = profileName !== '—' ? profileName.charAt(0).toUpperCase() : '👤';
+  document.getElementById('profileEmail').textContent  = currentUser.email || '—';
+  document.getElementById('profileRange').textContent  = currentUser.investmentRange || '—';
+  document.getElementById('profileSector').textContent = currentUser.preferredSector || '—';
+
+  // ── Fetch requests from Firestore for this investor ──
+  const investorEmail = currentUser.email || '';
+  const investorName  = profileName;
+
+  async function loadRequests() {
+    const requestList = document.getElementById('requestList');
+
+    try {
+      // ✅ Fetch from Firestore — filtered by this investor's email OR name
+      let snapshot;
+      if (investorEmail) {
+        snapshot = await db.collection('requests')
+          .where('investorEmail', '==', investorEmail)
+          .get();
+      }
+
+      // Fallback: also check by name in case email wasn't stored
+      let requests = [];
+      if (snapshot && !snapshot.empty) {
+        snapshot.forEach(doc => requests.push({ id: doc.id, ...doc.data() }));
+      } else {
+        // Try matching by investorName
+        const allSnap = await db.collection('requests')
+          .where('investorName', '==', investorName)
+          .get();
+        allSnap.forEach(doc => requests.push({ id: doc.id, ...doc.data() }));
+      }
+
+      if (requests.length === 0) {
+        requestList.innerHTML = '<div class="no-requests">📭 No requests from SMEs yet.</div>';
+        return;
+      }
+
+      renderRequests(requests);
+
+    } catch (err) {
+      console.error('Firestore error:', err);
+      requestList.innerHTML = '<div class="no-requests">⚠️ Could not load requests. Check your connection.</div>';
+    }
+  }
+
+  function renderRequests(requests) {
+    const requestList = document.getElementById('requestList');
+    requestList.innerHTML = '';
+
+    requests.forEach((req) => {
+      const card = document.createElement('div');
+      card.className = 'request-card';
+      card.innerHTML = `
+        <h3>
+          From: <strong>${req.smeName || 'SME'}</strong>
+          <span class="status-badge status-${req.status}">${req.status}</span>
+        </h3>
+        <p>${req.message}</p>
+        <div class="request-meta">📅 Sent on: ${req.date}</div>
+        ${req.status === 'Pending' ? `
+          <div class="action-btns">
+            <button class="acceptBtn"  data-id="${req.id}">✅ Accept</button>
+            <button class="declineBtn" data-id="${req.id}">❌ Decline</button>
+          </div>` : ''}
+        ${req.status === 'Accepted' ? `
+          <button class="chat-toggle-btn" onclick="toggleChat('${req.id}')">💬 Chat with ${req.smeName || 'SME'}</button>
+          <div class="chat-box" id="chat-${req.id}">
+            <div class="chat-messages" id="msgs-${req.id}"><div style="text-align:center;color:#aaa;font-size:0.85rem;padding:1rem;">Chat opened 👋</div></div>
+            <div class="chat-input-row">
+              <input type="text" id="chatInput-${req.id}" placeholder="Type..." onkeydown="if(event.key==='Enter') sendChatMsg('${req.id}','${req.smeEmail||''}')">
+              <button onclick="sendChatMsg('${req.id}','${req.smeEmail||''}')" >Send ➤</button>
+            </div>
+          </div>` : ''}
+      `;
+      requestList.appendChild(card);
+      if (req.status === 'Accepted') loadChatMessages(req.id);
+    });
+
+    // Bind accept/decline buttons
+    document.querySelectorAll('.acceptBtn').forEach(btn => {
+      btn.addEventListener('click', () => updateStatus(btn.dataset.id, 'Accepted'));
+    });
+    document.querySelectorAll('.declineBtn').forEach(btn => {
+      btn.addEventListener('click', () => updateStatus(btn.dataset.id, 'Declined'));
+    });
+  }
+
+  // ✅ Update status in Firestore
+  async function updateStatus(docId, status) {
+    try {
+      await db.collection('requests').doc(docId).update({ status });
+      loadRequests(); // re-fetch to reflect change
+    } catch (err) {
+      alert('❌ Failed to update: ' + err.message);
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('currentUser');
+    window.location.href = 'loginPage.html';
+  }
+
+  loadRequests();
+</script>
+
+</body>
+</html>
+
+<style>
+.chat-toggle-btn { background:#1976d2; color:#fff; border:none; padding:8px 18px; border-radius:25px; cursor:pointer; font-size:0.9rem; font-weight:600; margin-top:0.8rem; }
+.chat-toggle-btn:hover { background:#0d47a1; }
+.chat-box { display:none; margin-top:0.8rem; border:1px solid #e3f2fd; border-radius:12px; overflow:hidden; }
+.chat-box.open { display:block; }
+.chat-messages { height:200px; overflow-y:auto; padding:1rem; background:#f8fafd; display:flex; flex-direction:column; gap:0.5rem; }
+.chat-msg { max-width:75%; padding:8px 14px; border-radius:18px; font-size:0.9rem; }
+.chat-msg.sent { background:#1976d2; color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+.chat-msg.received { background:#fff; border:1px solid #e0e0e0; align-self:flex-start; border-bottom-left-radius:4px; }
+.msg-time { font-size:0.7rem; opacity:0.7; margin-top:2px; display:block; }
+.chat-input-row { display:flex; border-top:1px solid #e3f2fd; background:#fff; }
+.chat-input-row input { flex:1; border:none; padding:10px 14px; font-family:'Inter',sans-serif; outline:none; }
+.chat-input-row button { background:#1976d2; color:#fff; border:none; padding:10px 16px; cursor:pointer; font-weight:600; }
+</style>
+
+<script>
+  // Patch renderRequests to add chat for accepted requests
+  const _origRender = renderRequests;
+  // Override after load — inject chat into accepted cards
+  const _origLoadRequests = loadRequests;
+  loadRequests = async function() {
+    await _origLoadRequests();
+    // after render, attach chats
+  };
+
+  function toggleChat(reqId) {
+    const box = document.getElementById('chat-' + reqId);
+    if (box) { box.classList.toggle('open'); if (box.classList.contains('open')) loadChatMessages(reqId); }
+  }
+
+  function loadChatMessages(reqId) {
+    const msgsEl = document.getElementById('msgs-' + reqId);
+    if (!msgsEl) return;
+    const investorEmail = (JSON.parse(localStorage.getItem('currentUser')) || {}).email || '';
+    db.collection('chats').doc(reqId).collection('messages')
+      .orderBy('timestamp')
+      .onSnapshot(snapshot => {
+        if (snapshot.empty) return;
+        msgsEl.innerHTML = '';
+        snapshot.forEach(doc => {
+          const msg = doc.data();
+          const isSelf = msg.senderEmail === investorEmail;
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-msg ' + (isSelf ? 'sent' : 'received');
+          bubble.innerHTML = (!isSelf ? `<strong style="font-size:0.78rem;display:block;">${msg.senderName}</strong>` : '')
+            + msg.text + `<span class="msg-time">${msg.time}</span>`;
+          msgsEl.appendChild(bubble);
+        });
+        msgsEl.scrollTop = msgsEl.scrollHeight;
+      });
+  }
+
+  async function sendChatMsg(reqId, smeEmail) {
+    const input = document.getElementById('chatInput-' + reqId);
+    const text = input.value.trim();
+    if (!text) return;
+    const investorUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+    try {
+      await db.collection('chats').doc(reqId).collection('messages').add({
+        text,
+        senderEmail: investorUser.email || '',
+        senderName: investorUser.name || investorUser.username || 'Investor',
+        recipientEmail: smeEmail,
+        time: new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' }),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      input.value = '';
+    } catch (err) { alert('Failed: ' + err.message); }
+  }
+</script>

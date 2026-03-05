@@ -4,1295 +4,617 @@
 <meta charset="UTF-8" />
 <title>Investor Network - GrowWise</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
 <style>
 :root {
-  --primary-dark: #0d47a1;
-  --primary: #1976d2;
-  --primary-light: #e3f2fd;
-  --accent: #f76b45;
-  --accent-dark: #e65c39;
-  --light-bg: #f8fafd;
-  --text-dark: #333;
-  --text-medium: #555;
-  --text-light: #777;
-  --white: #ffffff;
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 8px 22px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.15);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --primary-dark: #0d47a1; --primary: #1976d2; --primary-light: #e3f2fd;
+  --accent: #f76b45; --accent-dark: #e65c39; --light-bg: #f8fafd;
+  --text-dark: #333; --text-medium: #555; --text-light: #777; --white: #fff;
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.08); --shadow-lg: 0 15px 35px rgba(0,0,0,0.15);
+  --radius-md: 12px; --radius-lg: 16px;
+  --transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
 }
+body { font-family:'Inter',Arial,sans-serif; background:var(--light-bg); margin:0; color:var(--text-dark); line-height:1.7; }
 
-body {
-  font-family: 'Inter', Arial, sans-serif;
-  background-color: var(--light-bg);
-  margin: 0;
-  padding: 0;
-  color: var(--text-dark);
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-/* ===== HEADER SECTION (KEEP THIS AS IS) ===== */
-.header-area {
-  background-color: #000;
+/* ============================================================
+   HEADER STYLES — scoped to .site-header
+============================================================ */
+.site-header {
+  background-color: #0a0a0a !important;
   width: 100%;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  border-bottom: 2px solid #1a1a1a;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.6);
 }
-
-.header-area .navbar-area {
-  display: flex;
-  justify-content: center;
-}
-
-.header-area .container {
-  max-width: 1200px;
-  width: 100%;
-  padding: 0 20px;
-}
-
-.header-area .navbar {
+.site-header .hdr-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 70px;
-  padding: 0;
-}
-
-.header-area .navbar-nav {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.navbar-nav .nav-item {
-  display: flex;
-  align-items: center;
-  height: 44px;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-nav .nav-item > a.page-scroll {
-  color: #ffffff !important;
-  text-decoration: none !important;
-  font-weight: 800 !important;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  padding: 0 8px !important;
-  height: 44px !important;
-  line-height: 44px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.2s ease;
-  position: relative;
-  white-space: nowrap;
-  margin: 0 !important;
-  vertical-align: middle !important;
-}
-
-.navbar-nav .dropdown-toggle {
-  color: #ffffff !important;
-  text-decoration: none !important;
-  font-weight: 800 !important;
-  text-transform: uppercase !important;
-  font-size: 0.9rem !important;
-  letter-spacing: 0.5px !important;
-  padding: 0 8px !important;
-  height: 44px !important;
-  line-height: 44px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.2s ease;
-  position: relative;
-  white-space: nowrap;
-  margin: 0 !important;
-  vertical-align: middle !important;
-  background: none !important;
-  border: none !important;
-  cursor: pointer;
-  font-family: 'Inter', Arial, sans-serif !important;
-}
-
-.navbar-nav .dropdown-toggle::after {
-  content: '▾' !important;
-  margin-left: 6px;
-  border: none !important;
-  font-size: 1rem;
-  vertical-align: middle !important;
-  display: inline-block !important;
-  position: relative !important;
-  top: -1px !important;
-}
-
-.navbar-nav .nav-item > a.page-scroll:hover,
-.navbar-nav .dropdown-toggle:hover {
-  color: var(--primary-light) !important;
-  transform: translateY(-1px);
-}
-
-.navbar-nav .dropdown {
-  display: flex;
-  align-items: center;
-  height: 44px;
-  position: relative;
-}
-
-.navbar-nav .dropdown-menu {
-  position: absolute;
-  top: 100% !important;
-  left: 0;
-  background-color: #111;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 0;
-  min-width: 160px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  display: none;
-  margin-top: 0;
-}
-
-.navbar-nav .dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu a {
-  color: #fff !important;
-  padding: 10px 20px;
-  font-weight: 800 !important;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  display: block;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.dropdown-menu a:hover {
-  background-color: var(--primary);
-  color: white !important;
-  padding-left: 25px;
-}
-
-.navbar-nav .nav-item a.main-btn.navbar-btn {
-  background: linear-gradient(to right, var(--accent), var(--accent-dark));
-  color: white !important;
-  border-radius: 30px;
-  padding: 0 24px !important;
-  font-weight: 800 !important;
-  text-transform: uppercase !important;
-  font-size: 0.9rem !important;
-  border: none !important;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(247, 107, 69, 0.3);
-  height: 38px !important;
-  min-height: 38px !important;
-  line-height: 38px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-decoration: none !important;
-  margin: 0 !important;
-  vertical-align: middle !important;
-  letter-spacing: 0.5px !important;
-  font-family: 'Inter', Arial, sans-serif !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-}
-
-.navbar-nav .nav-item a.main-btn.navbar-btn:hover {
-  background: linear-gradient(to right, var(--accent-dark), #d45333);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(247, 107, 69, 0.4);
-  color: white !important;
-}
-
-.theme-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: white;
-  width: 44px;
-  height: 44px;
-  min-height: 44px !important;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  margin-left: 5px;
-  padding: 0 !important;
-  vertical-align: middle !important;
-}
-
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(15deg);
-}
-
-.icon1 img {
-  width: 13rem;
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-.icon1 img:hover {
-  transform: scale(1.03);
-}
-
-/* Responsive header adjustments */
-@media (max-width: 1200px) {
-  .header-area .navbar-nav {
-    gap: 15px;
-  }
-  
-  .navbar-nav .nav-item > a.page-scroll,
-  .navbar-nav .dropdown-toggle {
-    font-size: 0.85rem;
-    padding: 0 6px !important;
-    font-weight: 800 !important;
-  }
-  
-  .navbar-nav .nav-item a.main-btn.navbar-btn {
-    font-size: 0.85rem !important;
-    padding: 0 18px !important;
-    height: 36px !important;
-    line-height: 36px !important;
-    font-weight: 800 !important;
-  }
-}
-
-@media (max-width: 992px) {
-  .header-area .navbar {
-    flex-wrap: wrap;
-    padding: 10px 0;
-  }
-  
-  .header-area .navbar-nav {
-    gap: 12px;
-  }
-  
-  .navbar-nav .nav-item a.main-btn.navbar-btn {
-    padding: 0 16px !important;
-    font-size: 0.85rem !important;
-    height: 34px !important;
-    line-height: 34px !important;
-    font-weight: 800 !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar-nav .nav-item a.main-btn.navbar-btn {
-    padding: 0 14px !important;
-    font-size: 0.8rem !important;
-    height: 32px !important;
-    line-height: 32px !important;
-    font-weight: 800 !important;
-  }
-}
-/* ===== END HEADER SECTION ===== */
-
-/* ===== ENHANCED MAIN CONTENT ===== */
-.hero-header {
-  background: linear-gradient(135deg, #0d47a1, #1976d2);
-  color: white;
-  padding: 5rem 1rem 4rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 3rem;
-}
-
-.hero-header::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231976d2' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-  opacity: 0.4;
-}
-
-.hero-header h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  position: relative;
-  z-index: 1;
-  letter-spacing: -0.5px;
-}
-
-.hero-header p {
-  font-size: 1.25rem;
-  opacity: 0.95;
-  max-width: 700px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  font-weight: 400;
-  line-height: 1.6;
-}
-
-/* MAIN */
-main {
-  padding: 3rem 1.5rem 5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* INVESTOR GRID */
-.investor-section {
-  margin-bottom: 4rem;
-}
-
-.investor-grid {
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding: 2rem 0.5rem 3rem;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  margin: 0 -0.5rem;
-}
-
-.investor-grid::-webkit-scrollbar {
-  height: 8px;
-}
-
-.investor-grid::-webkit-scrollbar-track {
-  background: #e9eff7;
-  border-radius: 10px;
-}
-
-.investor-grid::-webkit-scrollbar-thumb {
-  background: linear-gradient(to right, var(--primary), var(--primary-dark));
-  border-radius: 10px;
-}
-
-/* ENHANCED INVESTOR CARDS - FIXED STYLING */
-.investor-card {
-  flex: 0 0 300px;
-  scroll-snap-align: start;
-  background-color: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  text-align: center;
-  padding: 2.5rem 2rem;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(25, 118, 210, 0.1);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.investor-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(to right, var(--primary), var(--accent));
-  opacity: 0.5; /* Changed from 0 to 0.5 - always slightly visible */
-  transition: var(--transition);
-}
-
-.investor-card:hover::before {
-  opacity: 1;
-}
-
-.investor-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(25, 118, 210, 0.2);
-}
-
-/* Investor image styling */
-.investor-card img {
-  width: 140px; /* Slightly larger */
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1.5rem;
-  border: 8px solid var(--primary-light); /* Thicker border */
-  transition: var(--transition);
-  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.2); /* Stronger shadow */
-}
-
-.investor-card:hover img {
-  transform: scale(1.05); /* More subtle scale */
-  border-color: var(--primary);
-  box-shadow: 0 8px 25px rgba(25, 118, 210, 0.3);
-}
-
-/* Investor name */
-.investor-card h3 {
-  font-size: 1.5rem; /* Slightly larger */
-  margin-bottom: 0.5rem;
-  color: var(--primary-dark);
-  font-weight: 700; /* Bolder */
-  letter-spacing: -0.3px;
-}
-
-/* Investor title/role */
-.investor-card span {
-  display: block;
-  font-size: 0.95rem;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  font-weight: 600; /* Bolder */
-  letter-spacing: 0.3px;
-  padding: 6px 12px;
-  background: rgba(247, 107, 69, 0.08); /* Subtle background */
-  border-radius: 20px;
-  display: inline-block;
-}
-
-/* Investor description */
-.investor-card p {
-  font-size: 1rem;
-  color: var(--text-medium);
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  flex-grow: 1;
-  opacity: 0.9;
-}
-
-/* Investor button - CONSISTENT WITH OTHER CARDS */
-.investor-card button {
-  background: transparent; /* Changed from gradient to transparent */
-  border: 2px solid var(--primary); /* Added border like other cards */
-  padding: 10px 24px;
-  color: var(--primary); /* Changed from white to primary */
-  border-radius: 30px;
-  cursor: pointer;
-  transition: var(--transition);
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  box-shadow: 0 4px 10px rgba(25, 118, 210, 0.1); /* Softer shadow */
-  margin-top: auto;
-  font-size: 0.95rem;
-}
-
-.investor-card button:hover {
-  background: var(--primary); /* Now matches other cards */
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(25, 118, 210, 0.25); /* Consistent shadow */
-}
-
-/* Add subtle background pattern to investor cards */
-.investor-card::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(25, 118, 210, 0.03) 0%, transparent 70%);
-  opacity: 0;
-  transition: var(--transition);
-  z-index: -1;
-}
-
-.investor-card:hover::after {
-  opacity: 1;
-}
-
-/* STATS STRIP */
-.stats {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  text-align: center;
-  gap: 3rem;
-  margin: 5rem 0;
-  padding: 4rem 1.5rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
-}
-
-.stats::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-  opacity: 0.4;
-}
-
-.stats > div {
-  position: relative;
-  z-index: 1;
-}
-
-.stats h2 {
-  color: white;
-  font-size: 3.2rem;
-  margin: 0 0 0.5rem;
-  font-weight: 700;
-  letter-spacing: -1px;
-}
-
-.stats span {
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  font-weight: 500;
-}
-
-/* NETWORKING GRID */
-.network-grid, .event-grid, .case-grid, .blog-grid, .testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  margin-bottom: 5rem;
-}
-
-.network-card, .event-card, .case-card, .blog-card, .testimonial-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 2.5rem 2rem;
-  box-shadow: var(--shadow-sm);
-  text-align: center;
-  transition: var(--transition);
-  border: 1px solid rgba(25, 118, 210, 0.1);
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.network-card::before, .event-card::before, .case-card::before, .blog-card::before, .testimonial-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(to right, var(--primary), var(--accent));
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.network-card:hover::before, .event-card:hover::before, .case-card:hover::before, .blog-card:hover::before, .testimonial-card:hover::before {
-  opacity: 1;
-}
-
-.network-card:hover, .event-card:hover, .case-card:hover, .blog-card:hover, .testimonial-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
-}
-
-.network-card i, .event-card i, .case-card i, .testimonial-card i {
-  font-size: 2.5rem;
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-  background: var(--primary-light);
-  width: 80px;
-  height: 80px;
-  line-height: 80px;
-  border-radius: 50%;
-  display: inline-block;
-  transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.15);
-}
-
-.network-card:hover i, .event-card:hover i, .case-card:hover i, .testimonial-card:hover i {
-  background: var(--primary);
-  color: white;
-  transform: rotate(8deg) scale(1.15);
-}
-
-/* EMOJI STYLES FOR BLOG CARDS */
-.emoji-container {
-  font-size: 2.8rem;
-  margin-bottom: 1.5rem;
-  background: var(--primary-light);
-  width: 80px;
-  height: 80px;
-  line-height: 80px;
-  border-radius: 50%;
-  display: inline-block;
-  transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.15);
-}
-
-.blog-card:hover .emoji-container {
-  background: var(--primary);
-  transform: rotate(8deg) scale(1.15);
-}
-
-.network-card h4, .event-card h4, .case-card h4, .blog-card h4, .testimonial-card h4 {
-  margin-bottom: 0.75rem;
-  color: var(--primary-dark);
-  font-size: 1.4rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.network-card span, .event-card span, .case-card span, .blog-card span, .testimonial-card span {
-  font-size: 0.95rem;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
-
-.network-card p, .event-card p, .case-card p, .blog-card p, .testimonial-card p {
-  font-size: 1rem;
-  color: var(--text-medium);
-  margin-bottom: 2rem;
-  line-height: 1.7;
-  flex-grow: 1;
-}
-
-.network-card button, .event-card button, .case-card button, .blog-card button, .testimonial-card button {
-  background: transparent;
-  border: 2px solid var(--primary);
-  padding: 10px 24px;
-  color: var(--primary);
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: var(--transition);
-  font-size: 0.95rem;
-  letter-spacing: 0.3px;
-  margin-top: auto;
-}
-
-.network-card button:hover, .event-card button:hover, .case-card button:hover, .blog-card button:hover, .testimonial-card button:hover {
-  background: var(--primary);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(25, 118, 210, 0.25);
-}
-
-/* SECTION TITLES */
-.section-title {
-  text-align: center;
-  font-size: 2.5rem;
-  color: var(--primary-dark);
-  margin-bottom: 1rem;
-  font-weight: 700;
-  position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
-  letter-spacing: -0.3px;
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  left: 25%;
-  width: 50%;
-  height: 4px;
-  background: linear-gradient(to right, transparent, var(--accent), transparent);
-  border-radius: 2px;
-}
-
-.section-subtitle {
-  text-align: center;
-  color: var(--text-medium);
-  max-width: 700px;
-  margin: 1.5rem auto 3.5rem;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-/* CALL TO ACTION - CENTERED */
-.cta-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 6rem 0 4rem;
-}
-
-.cta {
-  text-align: center;
-  padding: 5rem 3rem;
-  background: linear-gradient(135deg, #f8fafd, #e9f2fb);
-  border-radius: var(--radius-lg);
-  position: relative;
-  overflow: hidden;
-  max-width: 900px;
-  width: 100%;
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba(25, 118, 210, 0.15);
-}
-
-.cta::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231976d2' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-}
-
-.cta-content {
-  position: relative;
-  z-index: 1;
-}
-
-.cta-icon {
-  font-size: 4rem;
-  margin-bottom: 2rem;
-  display: block;
-  animation: float 3s ease-in-out infinite;
-}
-
-.cta .section-title {
-  margin-bottom: 1rem;
-}
-
-.cta .section-subtitle {
-  margin-bottom: 2.5rem;
-}
-
-.cta button {
-  font-size: 1.2rem;
-  padding: 16px 40px;
-  border-radius: 30px;
-  background: linear-gradient(to right, var(--primary), var(--primary-dark));
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: var(--transition);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(25, 118, 210, 0.3);
-}
-
-.cta button:hover {
-  background: linear-gradient(to right, var(--primary-dark), var(--primary));
-  transform: translateY(-4px);
-  box-shadow: 0 15px 30px rgba(25, 118, 210, 0.4);
-}
-
-.cta button::after {
-  content: "🚀";
-  margin-left: 10px;
-  transition: var(--transition);
-}
-
-.cta button:hover::after {
-  transform: translateX(5px) rotate(15deg);
-}
-
-/* TESTIMONIAL CARD SPECIAL STYLING */
-.testimonial-card i.fa-quote-left {
-  background: transparent;
-  color: var(--primary-light);
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.testimonial-card:hover i.fa-quote-left {
-  background: transparent;
-  color: var(--primary);
-  transform: none;
-}
-
-/* ANIMATIONS */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
-}
-
-/* ADD SUBTLE BACKGROUND PATTERN TO MAIN */
-main::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(25, 118, 210, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(247, 107, 69, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hero-header {
-    padding: 4rem 1rem 3rem;
-  }
-  
-  .hero-header h1 {
-    font-size: 2.5rem;
-  }
-  
-  .hero-header p {
-    font-size: 1.1rem;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .section-subtitle {
-    font-size: 1.05rem;
-    margin: 1rem auto 2.5rem;
-  }
-  
-  .stats h2 {
-    font-size: 2.5rem;
-  }
-  
-  .investor-grid {
-    gap: 1.5rem;
-  }
-  
-  .investor-card {
-    flex: 0 0 280px;
-    padding: 2rem 1.5rem;
-  }
-  
-  .investor-card img {
-    width: 120px;
-    height: 120px;
-  }
-  
-  .network-grid,
-  .event-grid,
-  .case-grid,
-  .blog-grid,
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .cta {
-    padding: 3rem 1.5rem;
-  }
-  
-  .cta-icon {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 600px) {
-  main {
-    padding: 2rem 1rem 4rem;
-  }
-  
-  section {
-    margin-bottom: 4rem;
-  }
-  
-  .stats {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding: 3rem 1.5rem;
-  }
-  
-  .cta-container {
-    margin: 4rem 0 3rem;
-  }
-  
-  .cta button {
-    font-size: 1.1rem;
-    padding: 14px 30px;
-  }
-}
+  height: 72px;
+}
+.site-header .hdr-logo a { display: flex; align-items: center; text-decoration: none; }
+.site-header .hdr-logo img { height: 52px; width: auto; max-width: 200px; object-fit: contain; display: block; }
+.site-header .hdr-logo-fallback { display: none; flex-direction: column; line-height: 1; }
+.site-header .hdr-logo-fallback span { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; color: #f76b45; text-transform: uppercase; }
+.site-header .hdr-nav { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; gap: 0; }
+.site-header .hdr-nav .hdr-item { display: flex; align-items: center; position: relative; height: 72px; }
+.site-header .hdr-nav .hdr-link {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 700 !important; font-size: 0.95rem !important; letter-spacing: 1px !important;
+  text-transform: uppercase !important; color: #ffffff !important; text-decoration: none !important;
+  padding: 0 14px !important; height: 72px; display: flex !important; align-items: center !important;
+  white-space: nowrap; position: relative; transition: color 0.18s ease;
+  background: transparent !important; border: none !important; box-shadow: none !important; cursor: pointer;
+}
+.site-header .hdr-nav .hdr-link::before {
+  content: ''; position: absolute; bottom: 0; left: 14px; right: 14px;
+  height: 3px; background: #f76b45; border-radius: 2px 2px 0 0;
+  transform: scaleX(0); transition: transform 0.2s ease;
+}
+.site-header .hdr-nav .hdr-item:hover .hdr-link { color: #f76b45 !important; }
+.site-header .hdr-nav .hdr-item:hover .hdr-link::before { transform: scaleX(1); }
+.site-header .hdr-drop-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 4px;
+  background: rgba(247,107,69,0.15); border: 1px solid rgba(247,107,69,0.3);
+  margin-left: 5px; transition: background 0.2s;
+}
+.site-header .hdr-drop-icon svg { width: 10px; height: 10px; fill: none; transition: transform 0.2s; }
+.site-header .hdr-item.hdr-has-drop:hover .hdr-drop-icon { background: rgba(247,107,69,0.3); }
+.site-header .hdr-item.hdr-has-drop:hover .hdr-drop-icon svg { transform: rotate(180deg); }
+.site-header .hdr-dropdown {
+  position: absolute; top: calc(100% + 1px); left: 0;
+  background: #111; border: 1px solid #2a2a2a; border-top: 2px solid #f76b45;
+  border-radius: 0 0 10px 10px; padding: 6px 0; min-width: 150px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: all 0.2s ease; z-index: 99999; list-style: none; display: block !important;
+}
+.site-header .hdr-item.hdr-has-drop:hover .hdr-dropdown,
+.site-header .hdr-item.hdr-has-drop.open .hdr-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.site-header .hdr-dropdown li a {
+  display: block; padding: 10px 20px;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 700 !important; font-size: 0.9rem !important; letter-spacing: 1px !important;
+  text-transform: uppercase !important; color: #ccc !important; text-decoration: none !important;
+  background: transparent !important; border: none !important; box-shadow: none !important; transition: all 0.15s;
+}
+.site-header .hdr-dropdown li a:hover { background: #f76b45 !important; color: #000 !important; padding-left: 26px; }
+.site-header .hdr-login {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 0.95rem !important; letter-spacing: 1.5px !important;
+  text-transform: uppercase !important; color: #fff !important;
+  background: linear-gradient(135deg, #f76b45, #e8522a) !important;
+  border: none !important; border-radius: 50px !important; padding: 0 24px !important;
+  height: 42px; display: inline-flex !important; align-items: center; gap: 8px;
+  text-decoration: none !important; white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(247,107,69,0.45) !important;
+  transition: all 0.2s ease; cursor: pointer; margin-left: 8px;
+}
+.site-header .hdr-login:hover {
+  background: linear-gradient(135deg, #ff7d5a, #f76b45) !important;
+  transform: translateY(-2px); box-shadow: 0 8px 25px rgba(247,107,69,0.6) !important; color: #fff !important;
+}
+.site-header .hdr-login .hdr-btn-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; background: rgba(255,255,255,0.2); border-radius: 4px;
+}
+.site-header .hdr-toggle {
+  width: 46px; height: 46px; border-radius: 50% !important;
+  background: #1a1a1a !important; border: 2px solid #2a2a2a !important;
+  color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; margin-left: 10px; flex-shrink: 0; box-shadow: none !important;
+}
+.site-header .hdr-toggle:hover { background: rgba(247,107,69,0.2) !important; border-color: #f76b45 !important; transform: rotate(15deg) !important; }
+body.dark-mode .site-header { background-color: #0a0a0a !important; }
+@media (max-width: 1100px) { .site-header .hdr-nav .hdr-link { padding: 0 10px !important; font-size: 0.88rem !important; } }
+@media (max-width: 900px) {
+  .site-header .hdr-inner { padding: 0 16px; flex-wrap: wrap; height: auto; padding-top: 12px; padding-bottom: 12px; }
+  .site-header .hdr-nav { flex-wrap: wrap; gap: 2px; margin-top: 8px; width: 100%; }
+  .site-header .hdr-nav .hdr-item { height: 44px; }
+  .site-header .hdr-nav .hdr-link { height: 44px; }
+}
+
+/* ===== REST OF PAGE (UNCHANGED) ===== */
+main { padding:2rem 1.5rem 5rem; max-width:1200px; margin:0 auto; }
+.tabs-bar { display:flex; background:#fff; border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); padding:6px; margin-bottom:2.5rem; width:fit-content; }
+.tab-btn { padding:10px 28px; border:none; background:transparent; border-radius:var(--radius-md); font-weight:600; font-size:1rem; cursor:pointer; color:var(--text-medium); transition:var(--transition); position:relative; }
+.tab-btn.active { background:var(--primary); color:#fff; box-shadow:0 4px 12px rgba(25,118,210,0.3); }
+.notif-dot { position:absolute; top:6px; right:8px; width:9px; height:9px; background:#f76b45; border-radius:50%; border:2px solid #fff; display:none; }
+.notif-dot.show { display:block; }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+.investor-grid { display:flex; gap:2rem; overflow-x:auto; padding:1rem 0.5rem 2rem; scroll-snap-type:x mandatory; }
+.investor-grid::-webkit-scrollbar { height:8px; }
+.investor-grid::-webkit-scrollbar-track { background:#e9eff7; border-radius:10px; }
+.investor-grid::-webkit-scrollbar-thumb { background:linear-gradient(to right,var(--primary),var(--primary-dark)); border-radius:10px; }
+.investor-card { flex:0 0 300px; scroll-snap-align:start; background:var(--white); border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); text-align:center; padding:2.5rem 2rem; transition:var(--transition); position:relative; overflow:hidden; border:1px solid rgba(25,118,210,0.1); display:flex; flex-direction:column; align-items:center; }
+.investor-card::before { content:""; position:absolute; top:0; left:0; width:100%; height:4px; background:linear-gradient(to right,var(--primary),var(--accent)); opacity:0.5; transition:var(--transition); }
+.investor-card:hover::before { opacity:1; }
+.investor-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-lg); }
+.investor-avatar { width:90px; height:90px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--primary-dark)); display:flex; align-items:center; justify-content:center; font-size:2.2rem; color:#fff; font-weight:700; margin-bottom:1.2rem; border:5px solid var(--primary-light); }
+.investor-card h3 { font-size:1.3rem; margin-bottom:0.3rem; color:var(--primary-dark); font-weight:700; }
+.inv-role { font-size:0.85rem; color:var(--text-medium); display:block; margin-bottom:0.5rem; }
+.inv-range { display:inline-block; font-size:0.8rem; background:#e8f5e9; color:#2e7d32; font-weight:600; padding:3px 10px; border-radius:20px; margin-bottom:0.4rem; }
+.inv-sector { display:inline-block; font-size:0.8rem; color:var(--primary); font-weight:600; padding:3px 10px; background:var(--primary-light); border-radius:20px; margin-bottom:1rem; margin-left:4px; }
+.investor-card p { font-size:0.92rem; color:var(--text-medium); margin-bottom:1.5rem; line-height:1.6; flex-grow:1; }
+.contact-investor-btn { background:transparent; border:2px solid var(--primary); padding:10px 24px; color:var(--primary); border-radius:30px; cursor:pointer; transition:var(--transition); font-weight:600; font-size:0.95rem; }
+.contact-investor-btn:hover { background:var(--primary); color:white; }
+.loading-state { text-align:center; padding:3rem; width:100%; color:var(--text-light); }
+.loading-spinner { display:inline-block; width:36px; height:36px; border:4px solid var(--primary-light); border-top-color:var(--primary); border-radius:50%; animation:spin 0.8s linear infinite; margin-bottom:0.8rem; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.request-card { background:#fff; border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); padding:1.5rem 1.8rem; margin-bottom:1.5rem; border-left:5px solid var(--primary); }
+.request-card.accepted { border-left-color:#4caf50; }
+.request-card.declined { border-left-color:#f44336; opacity:0.75; }
+.req-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem; }
+.req-header h3 { margin:0; font-size:1.1rem; color:var(--primary-dark); }
+.status-badge { display:inline-block; padding:3px 12px; border-radius:20px; font-size:0.8rem; font-weight:700; }
+.badge-Pending  { background:#fff3e0; color:#e65100; }
+.badge-Accepted { background:#e8f5e9; color:#2e7d32; }
+.badge-Declined { background:#ffebee; color:#c62828; }
+.req-msg { color:var(--text-medium); font-size:0.95rem; margin:0.4rem 0; }
+.req-date { font-size:0.8rem; color:#aaa; margin-bottom:0.8rem; }
+.contact-info-box { background:linear-gradient(135deg,#e8f5e9,#f1f8e9); border:1px solid #a5d6a7; border-radius:var(--radius-md); padding:1rem 1.2rem; margin:0.8rem 0; }
+.contact-info-box h4 { margin:0 0 0.5rem; font-size:0.95rem; color:#2e7d32; font-weight:700; }
+.contact-info-box p { margin:0.2rem 0; font-size:0.9rem; color:#333; }
+.contact-info-box a { color:var(--primary); font-weight:600; text-decoration:none; }
+.contact-info-box a:hover { text-decoration:underline; }
+.chat-toggle-btn { background:var(--primary); color:#fff; border:none; padding:8px 20px; border-radius:25px; cursor:pointer; font-size:0.9rem; font-weight:600; margin-top:0.5rem; transition:var(--transition); }
+.chat-toggle-btn:hover { background:var(--primary-dark); }
+.chat-box { display:none; margin-top:1rem; border:1px solid var(--primary-light); border-radius:var(--radius-md); overflow:hidden; }
+.chat-box.open { display:block; }
+.chat-messages { height:220px; overflow-y:auto; padding:1rem; background:#f8fafd; display:flex; flex-direction:column; gap:0.6rem; }
+.chat-msg { max-width:75%; padding:8px 14px; border-radius:18px; font-size:0.9rem; line-height:1.4; }
+.chat-msg.sent { background:var(--primary); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+.chat-msg.received { background:#fff; color:var(--text-dark); align-self:flex-start; border:1px solid #e0e0e0; border-bottom-left-radius:4px; }
+.msg-time { font-size:0.7rem; opacity:0.7; margin-top:2px; display:block; }
+.chat-input-row { display:flex; border-top:1px solid var(--primary-light); background:#fff; }
+.chat-input-row input { flex:1; border:none; padding:10px 14px; font-family:'Inter',sans-serif; font-size:0.95rem; outline:none; }
+.chat-input-row button { background:var(--primary); color:#fff; border:none; padding:10px 18px; cursor:pointer; font-weight:600; }
+.chat-input-row button:hover { background:var(--primary-dark); }
+.toast { position:fixed; bottom:24px; right:24px; color:#fff; padding:12px 20px; border-radius:10px; font-size:0.95rem; z-index:9999; opacity:0; transform:translateY(20px); transition:all 0.3s ease; pointer-events:none; }
+.toast.show { opacity:1; transform:translateY(0); }
+.toast.success { background:#2e7d32; }
+.toast.info    { background:#1976d2; }
+.section-title { text-align:center; font-size:2.2rem; color:var(--primary-dark); margin-bottom:0.8rem; font-weight:700; position:relative; display:inline-block; left:50%; transform:translateX(-50%); }
+.section-title::after { content:""; position:absolute; bottom:-10px; left:25%; width:50%; height:4px; background:linear-gradient(to right,transparent,var(--accent),transparent); border-radius:2px; }
+.section-subtitle { text-align:center; color:var(--text-medium); max-width:700px; margin:1.2rem auto 2.5rem; font-size:1.1rem; }
+.stats { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); text-align:center; gap:3rem; margin:4rem 0; padding:3.5rem 1.5rem; border-radius:var(--radius-lg); }
+.stats h2 { color:white; font-size:3rem; margin:0 0 0.4rem; font-weight:700; }
+.stats span { color:rgba(255,255,255,0.9); font-size:1rem; }
+.no-content { text-align:center; padding:3rem; background:#fff; border-radius:var(--radius-lg); color:var(--text-light); font-size:1rem; }
+.modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:none; align-items:center; justify-content:center; z-index:9999; backdrop-filter:blur(3px); }
+.modal-overlay.open { display:flex; }
+.modal-card { background:var(--white); max-width:420px; width:90%; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); padding:2rem; position:relative; animation:modalFade 0.25s; }
+@keyframes modalFade { from{opacity:0;transform:scale(0.95)} to{opacity:1;transform:scale(1)} }
+.modal-close-btn { position:absolute; top:15px; right:20px; font-size:1.8rem; cursor:pointer; color:var(--text-light); background:none; border:none; line-height:1; }
+.modal-inv-header { display:flex; align-items:center; gap:15px; margin-bottom:1.5rem; }
+.modal-inv-avatar { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--primary-dark)); display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:#fff; font-weight:700; flex-shrink:0; }
+.modal-inv-header h3 { font-size:1.2rem; margin:0 0 3px; color:var(--primary-dark); }
+.modal-inv-header span { font-size:0.85rem; color:var(--accent); font-weight:600; }
+.modal-field { margin-bottom:1.1rem; }
+.modal-field label { font-weight:600; color:var(--text-dark); margin-bottom:5px; display:block; font-size:0.9rem; }
+.modal-field input,.modal-field textarea { width:100%; padding:11px 14px; border:1px solid #ccc; border-radius:var(--radius-md); font-family:'Inter',sans-serif; font-size:0.95rem; box-sizing:border-box; transition:var(--transition); }
+.modal-field input:focus,.modal-field textarea:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(25,118,210,0.15); }
+.modal-field textarea { min-height:100px; resize:vertical; }
+.modal-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:1rem; }
+.modal-btn { padding:10px 22px; border-radius:30px; font-weight:600; cursor:pointer; border:none; font-size:0.9rem; transition:var(--transition); }
+.modal-btn.cancel { background:transparent; border:2px solid #aaa; color:#555; }
+.modal-btn.cancel:hover { background:#eee; }
+.modal-btn.send { background:var(--primary); color:white; border:2px solid var(--primary); }
+.modal-btn.send:hover { background:var(--primary-dark); }
 </style>
 </head>
-
 <body>
-<div id="preloader">
-  <div id="lottie-loader"></div>
-</div>
 
-<div class="content-wrapper">
-  <header class="header-area">
-  <div class="navbar-area">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg d-flex align-items-center">
+<!-- ===== HEADER matching schemes/loans page ===== -->
+<header class="site-header">
+  <div class="hdr-inner">
 
-        <div class="icon1">
-          <a href="./index.html">
-            <img src="./assets/images/Growwise.png" alt="icon.png" style="width: 13rem;">
-          </a>
-        </div>
-
-        <ul class="navbar-nav ml-auto" style="margin-left:auto; display:flex; align-items:center; gap:15px;">
-          <li class="nav-item"><a class="page-scroll" href="./index.html">HOME</a></li>
-          <li class="nav-item"><a class="page-scroll" href="./about.html">Loans and schemes</a></li>
-          <li class="nav-item"><a class="page-scroll" href="./courses.html">COURSES </a></li>
-          <li class="nav-item"><a class="page-scroll" href="./contact.html"> INVESTOR CONTACT </a></li>
-          <li class="nav-item"><a class="page-scroll" href="./faq.html">HELP </a></li>
-
-          <li class="nav-item dropdown">
-            <a class="page-scroll dropdown-toggle" href="#" id="exploreDropdown" data-toggle="dropdown">
-              EXPLORE 📚
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="./tools/sip.html">TOOLS </a>
-              <a class="dropdown-item" href="./blog.html">BLOGS </a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="main-btn navbar-btn" href="./loginPage.html">LOGIN / REGISTER </a>
-          </li>
-
-          <li class="nav-item">
-            <button id="theme-toggle" class="theme-toggle">🌙</button>
-          </li>
-        </ul>
-
-      </nav>
+    <div class="hdr-logo">
+      <a href="./index.html">
+        <img src="assets/images/Growwise.png" alt="GROWWISE SME"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="hdr-logo-fallback" style="display:none;"><span>GROWWISE SME</span></div>
+      </a>
     </div>
+
+    <ul class="hdr-nav">
+      <li class="hdr-item"><a class="hdr-link" href="./index.html">Home</a></li>
+      <li class="hdr-item"><a class="hdr-link" href="./loans.html">Loans and Schemes</a></li>
+      <li class="hdr-item"><a class="hdr-link" href="./finance.html">Courses</a></li>
+      <li class="hdr-item"><a class="hdr-link" href="./investor-network.html">Investor Contact</a></li>
+      <li class="hdr-item"><a class="hdr-link" href="./faq.html">Help</a></li>
+
+      <li class="hdr-item hdr-has-drop">
+        <a class="hdr-link" href="#">
+          Explore
+          <span class="hdr-drop-icon">
+            <svg viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 5L9 1" stroke="#f76b45" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </a>
+        <ul class="hdr-dropdown">
+          <li><a href="./tools/sip.html">Tools</a></li>
+          <li><a href="./blog.html">Blogs</a></li>
+        </ul>
+      </li>
+
+      <li class="hdr-item">
+        <a class="hdr-login" href="./loginPage.html">
+          Login / Register
+          <span class="hdr-btn-icon">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <rect x="1" y="1" width="10" height="10" rx="2" stroke="white" stroke-width="1.5"/>
+              <path d="M4 6h4M6 4l2 2-2 2" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </a>
+      </li>
+
+      <li class="hdr-item">
+        <button id="theme-toggle" class="hdr-toggle" aria-label="Toggle dark mode">&#127769;</button>
+      </li>
+    </ul>
+
   </div>
 </header>
 
-<!-- Theme Toggle Script -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleButton = document.getElementById('theme-toggle');
-  const body = document.body;
-
-  toggleButton.addEventListener('click', function () {
-    body.classList.toggle('dark-mode');
-    toggleButton.textContent = body.classList.contains('dark-mode') ? '🌞' : '🌙';
+  document.querySelectorAll('.site-header .hdr-item.hdr-has-drop > .hdr-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var parent = this.closest('.hdr-item.hdr-has-drop');
+      var isOpen = parent.classList.contains('open');
+      document.querySelectorAll('.site-header .hdr-item.hdr-has-drop').forEach(function(el) { el.classList.remove('open'); });
+      if (!isOpen) parent.classList.add('open');
+    });
   });
-});
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.site-header .hdr-item.hdr-has-drop')) {
+      document.querySelectorAll('.site-header .hdr-item.hdr-has-drop').forEach(function(el) { el.classList.remove('open'); });
+    }
+  });
+  (function () {
+    var toggle = document.getElementById('theme-toggle');
+    var body = document.body;
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark') { body.classList.add('dark-mode'); toggle.textContent = '\u2600\uFE0F'; }
+    else { toggle.textContent = '\uD83C\uDF19'; }
+    toggle.addEventListener('click', function () {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) { toggle.textContent = '\u2600\uFE0F'; localStorage.setItem('theme', 'dark'); }
+      else { toggle.textContent = '\uD83C\uDF19'; localStorage.setItem('theme', 'light'); }
+    });
+  })();
 </script>
-
-<!-- Bootstrap Dropdown Support -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-
-
-
 <main>
-  <!-- INVESTOR SCROLLING ROW -->
-  <section class="investor-section">
-    <h2 class="section-title">Featured Investors</h2>
-    <p class="section-subtitle">Scroll horizontally to explore active investors aligned with your business stage</p>
-    <div class="investor-grid">
-      <div class="investor-card">
-        <img src="assets/images/inv1.png" alt="Investor">
-        <h3>Ananya Iyer</h3>
-        <span>Angel Investor · FinTech</span>
-        <p>Early-stage investor with a strong focus on financial inclusion and SME growth.</p>
-        <button>Contact Investor</button>
-      </div>
-      <div class="investor-card">
-        <img src="assets/images/inv2.png" alt="Investor">
-        <h3>Karan Verma</h3>
-        <span>VC Partner · SaaS</span>
-        <p>Backs scalable SaaS startups and technology-driven business models.</p>
-        <button>Contact Investor</button>
-      </div>
-      <div class="investor-card">
-        <img src="assets/images/inv3.png" alt="Investor">
-        <h3>Meera Nair</h3>
-        <span>Seed Investor · AI & Data</span>
-        <p>Supports AI-powered platforms with strong data-driven decision systems.</p>
-        <button>Contact Investor</button>
-      </div>
-      <div class="investor-card">
-        <img src="assets/images/inv4.png" alt="Investor">
-        <h3>Rohit Mehta</h3>
-        <span>Impact Investor · SMEs</span>
-        <p>Invests in sustainable businesses solving real-world SME challenges.</p>
-        <button>Contact Investor</button>
-      </div>
-      <div class="investor-card">
-        <img src="assets/images/inv5.png" alt="Investor">
-        <h3>Arjun Malhotra</h3>
-        <span>Growth Investor · E-Commerce</span>
-        <p>Supports fast-growing digital commerce startups with strong unit economics and scalability.</p>
-        <button>Contact Investor</button>
-      </div>
-    </div>
-  </section>
+  <!-- TABS -->
+  <div class="tabs-bar">
+    <button class="tab-btn active" id="tabInvestors" onclick="switchTab('investors')">&#128269; Browse Investors</button>
+    <button class="tab-btn" id="tabRequests" onclick="switchTab('requests')">
+      &#128236; My Requests <span class="notif-dot" id="notifDot"></span>
+    </button>
+  </div>
 
-  <!-- STATS STRIP -->
-  <section class="stats">
-    <div>
-      <h2>120+</h2>
-      <span>Active Investors</span>
+  <!-- TAB 1: BROWSE INVESTORS -->
+  <div class="tab-content active" id="tabInvestorsContent">
+    <h2 class="section-title">Meet Our Investors</h2>
+    <p class="section-subtitle">Connect with the right investors to grow your business.</p>
+    <div class="investor-grid" id="investorGrid">
+      <div class="loading-state"><div class="loading-spinner"></div><p>Loading investors...</p></div>
     </div>
-    <div>
-      <h2>450+</h2>
-      <span>Startups Connected</span>
-    </div>
-    <div>
-      <h2>₹90Cr+</h2>
-      <span>Funding Facilitated</span>
-    </div>
-  </section>
-
-  <!-- NETWORKING OPPORTUNITIES -->
-  <section>
-    <h2 class="section-title">Upcoming Networking Opportunities</h2>
-    <p class="section-subtitle">Events, office hours, and meetups to connect with investors directly</p>
-    <div class="network-grid">
-      <div class="network-card">
-        <i class="fa fa-users"></i>
-        <h4>Startup Pitch Day</h4>
-        <span>15 March · Virtual</span>
-        <p>Pitch directly to angel investors. Get live feedback and potential investment offers.</p>
-        <button>View Details</button>
-      </div>
-      <div class="network-card">
-        <i class="fa fa-briefcase"></i>
-        <h4>SME Growth Meet</h4>
-        <span>22 March · Bengaluru</span>
-        <p>Founder networking & panels with industry leaders and experienced investors.</p>
-        <button>Register Now</button>
-      </div>
-      <div class="network-card">
-        <i class="fa fa-clock-o"></i>
-        <h4>Investor Office Hours</h4>
-        <span>5 April · Online</span>
-        <p>1-on-1 investor discussions to get personalized advice on your business model.</p>
-        <button>Book Slot</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- UPCOMING EVENTS / CALENDAR -->
-  <section>
-    <h2 class="section-title">Upcoming Events</h2>
-    <p class="section-subtitle">Plan ahead with our curated investor-focused events</p>
-    <div class="event-grid">
-      <div class="event-card">
-        <i class="fa fa-calendar"></i>
-        <h4>FinTech Workshop</h4>
-        <span>10 Jan · Online</span>
-        <p>Learn fundraising strategies for fintech startups from successful founders.</p>
-        <button>Register</button>
-      </div>
-      <div class="event-card">
-        <i class="fa fa-calendar"></i>
-        <h4>Seed Funding Panel</h4>
-        <span>18 Jan · Mumbai</span>
-        <p>Meet investors and discuss seed funding tips for early-stage ventures.</p>
-        <button>Join Event</button>
-      </div>
-      <div class="event-card">
-        <i class="fa fa-calendar"></i>
-        <h4>Pitch Prep Bootcamp</h4>
-        <span>25 Jan · Virtual</span>
-        <p>Get expert feedback on your pitch deck and presentation skills.</p>
-        <button>Sign Up</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- SUCCESS STORIES -->
-  <section>
-    <h2 class="section-title">Success Stories</h2>
-    <p class="section-subtitle">Startups that grew with the help of our investors</p>
-    <div class="case-grid">
-      <div class="case-card">
-        <i class="fa fa-line-chart"></i>
-        <h4>FinGrow</h4>
-        <span>Seed funded by Meera Nair</span>
-        <p>Achieved 5x growth in 1 year and expanded to 3 new markets.</p>
-        <button>Learn More</button>
-      </div>
-      <div class="case-card">
-        <i class="fa fa-line-chart"></i>
-        <h4>SaaSify</h4>
-        <span>Backed by Karan Verma</span>
-        <p>Expanded to 3 new countries within 6 months of funding.</p>
-        <button>Read Story</button>
-      </div>
-      <div class="case-card">
-        <i class="fa fa-line-chart"></i>
-        <h4>EcoBiz</h4>
-        <span>Impact Investor Rohit Mehta</span>
-        <p>Built sustainable SME supply chain solutions across India.</p>
-        <button>See Case</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG / INSIGHTS WITH EMOJIS -->
-  <section>
-    <h2 class="section-title">Tips & Insights</h2>
-    <p class="section-subtitle">Expert advice to help startups raise funds & scale</p>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <div class="emoji-container">📊</div>
-        <h4>5 Pitch Deck Mistakes</h4>
-        <span>by Ananya Iyer</span>
-        <p>Common mistakes startups make when pitching investors and how to avoid them.</p>
-        <button>Read Article</button>
-      </div>
-      <div class="blog-card">
-        <div class="emoji-container">💰</div>
-        <h4>Valuation Tips</h4>
-        <span>by Karan Verma</span>
-        <p>Understanding SaaS startup valuations in 2026 and what investors look for.</p>
-        <button>Read Article</button>
-      </div>
-      <div class="blog-card">
-        <div class="emoji-container">📈</div>
-        <h4>Financial Planning</h4>
-        <span>by Rohit Mehta</span>
-        <p>How SMEs can prepare for investor discussions and build sustainable financial models.</p>
-        <button>Learn More</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section>
-    <h2 class="section-title">Testimonials</h2>
-    <p class="section-subtitle">What founders & investors say about GrowWise</p>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <i class="fa fa-quote-left"></i>
-        <h4>Rohit Mehta</h4>
-        <span>Angel Investor</span>
-        <p>"GrowWise connects me to high-quality startups efficiently. The platform's vetting process saves me time."</p>
-      </div>
-      <div class="testimonial-card">
-        <i class="fa fa-quote-left"></i>
-        <h4>Meera Nair</h4>
-        <span>Impact Investor</span>
-        <p>"I love supporting SMEs with real-world impact. This platform simplifies the investment process."</p>
-      </div>
-      <div class="testimonial-card">
-        <i class="fa fa-quote-left"></i>
-        <h4>FinGrow</h4>
-        <span>Startup Founder</span>
-        <p>"We secured funding and mentorship through GrowWise, which accelerated our growth by 18 months."</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CALL TO ACTION - CENTERED -->
-  <div class="cta-container">
-    <section class="cta">
-      <div class="cta-content">
-        <div class="cta-icon">🤝</div>
-        <h2 class="section-title">Ready to Connect with Investors?</h2>
-        <p class="section-subtitle">Sign up and explore funding opportunities tailored for your startup or SME.</p>
-        <button>Get Started For Free</button>
-      </div>
+    <section class="stats">
+      <div><h2>120+</h2><span>Active Investors</span></div>
+      <div><h2>450+</h2><span>Startups Connected</span></div>
+      <div><h2>&#8377;90Cr+</h2><span>Funding Facilitated</span></div>
     </section>
+  </div>
+
+  <!-- TAB 2: MY REQUESTS -->
+  <div class="tab-content" id="tabRequestsContent">
+    <h2 class="section-title">My Requests</h2>
+    <p class="section-subtitle">Track your requests. Accepted ones unlock investor contact &amp; chat.</p>
+    <div id="myRequestsList">
+      <div class="loading-state"><div class="loading-spinner"></div><p>Loading your requests...</p></div>
+    </div>
   </div>
 </main>
 
+<!-- CONNECT MODAL -->
+<div id="contactModal" class="modal-overlay">
+  <div class="modal-card">
+    <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+    <div class="modal-inv-header">
+      <div class="modal-inv-avatar" id="modalAvatar">A</div>
+      <div>
+        <h3 id="modalInvestorName">Investor</h3>
+        <span id="modalInvestorMeta">Investor &middot; Sector</span>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>Your Business Name</label>
+      <input type="text" id="senderName" placeholder="e.g., Sunrise Tech">
+    </div>
+    <div class="modal-field">
+      <label>Message (about your project)</label>
+      <textarea id="messageText" placeholder="Briefly describe your business, funding stage, and what you're looking for..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" id="cancelModalBtn">Cancel</button>
+      <button class="modal-btn send" id="sendRequestBtn">Send Request</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-  // Add some interactive effects
-  document.addEventListener('DOMContentLoaded', function() {
-    // Add scroll animations for cards
-    const cards = document.querySelectorAll('.investor-card, .network-card, .event-card, .case-card, .blog-card, .testimonial-card');
-    
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
+  // Firebase Init
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZV532N9_KYTuIuH5oG606Qpqhc0lG7no",
+    authDomain: "smeproj-c54b4.firebaseapp.com",
+    projectId: "smeproj-c54b4",
+    storageBucket: "smeproj-c54b4.app",
+    messagingSenderId: "415550648607",
+    appId: "1:415550648607:web:741b6ba5854391f60a402a"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+  const smeName  = currentUser.businessName || currentUser.username || 'An SME';
+  const smeEmail = currentUser.email || '';
+
+  // Toast
+  function showToast(msg, type = 'info') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.className = 'toast', 3500);
+  }
+
+  // Tab switch
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    const key = tab.charAt(0).toUpperCase() + tab.slice(1);
+    document.getElementById('tab' + key).classList.add('active');
+    document.getElementById('tab' + key + 'Content').classList.add('active');
+    if (tab === 'requests') {
+      document.getElementById('notifDot').classList.remove('show');
+      loadMyRequests();
+    }
+  }
+
+  // Load Investors
+  const investorGrid = document.getElementById('investorGrid');
+  let investors = [];
+
+  async function loadInvestors() {
+    try {
+      const snapshot = await db.collection('investors').get();
+      if (snapshot.empty) { investorGrid.innerHTML = '<div class="no-content">&#128205; No investors registered yet.</div>'; return; }
+      investors = [];
+      snapshot.forEach(doc => investors.push(doc.data()));
+      localStorage.setItem('investors', JSON.stringify(investors));
+      investorGrid.innerHTML = '';
+      investors.forEach((inv, i) => {
+        const card = document.createElement('div');
+        card.className = 'investor-card';
+        card.innerHTML = `
+          <div class="investor-avatar">${(inv.name||'?').charAt(0).toUpperCase()}</div>
+          <h3>${inv.name}</h3>
+          <span class="inv-role">${inv.role||'Investor'}</span>
+          <span class="inv-range">&#128176; ${inv.investmentRange||'N/A'}</span>
+          <span class="inv-sector">&#127981; ${inv.preferredSector||'General'}</span>
+          <p>${inv.desc||'Experienced investor looking for promising SMEs.'}</p>
+          <button class="contact-investor-btn" data-index="${i}">Connect &rarr;</button>`;
+        investorGrid.appendChild(card);
       });
-    }, observerOptions);
-    
-    cards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(card);
-    });
-    
-    // Button click effects
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        // Ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-          position: absolute;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.7);
-          transform: scale(0);
-          animation: ripple-animation 0.6s linear;
-          width: ${size}px;
-          height: ${size}px;
-          top: ${y}px;
-          left: ${x}px;
-          pointer-events: none;
-        `;
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-          ripple.remove();
-        }, 600);
-      });
-    });
-  });
-  
-  // Add CSS for ripple animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
+    } catch (err) {
+      const cached = JSON.parse(localStorage.getItem('investors')) || [];
+      if (cached.length > 0) {
+        investors = cached;
+        investorGrid.innerHTML = '';
+        cached.forEach((inv, i) => {
+          const card = document.createElement('div');
+          card.className = 'investor-card';
+          card.innerHTML = `
+            <div class="investor-avatar">${inv.name.charAt(0).toUpperCase()}</div>
+            <h3>${inv.name}</h3><span class="inv-role">${inv.role||'Investor'}</span>
+            <span class="inv-range">&#128176; ${inv.investmentRange||'N/A'}</span>
+            <span class="inv-sector">&#127981; ${inv.preferredSector||'General'}</span>
+            <p>${inv.desc||''}</p>
+            <button class="contact-investor-btn" data-index="${i}">Connect &rarr;</button>`;
+          investorGrid.appendChild(card);
+        });
+      } else {
+        investorGrid.innerHTML = '<div class="no-content">&#9888;&#65039; Could not load investors.</div>';
       }
     }
-  `;
-  document.head.appendChild(style);
+  }
+  loadInvestors();
+
+  // Modal
+  const modalOverlay = document.getElementById('contactModal');
+  const sendBtn = document.getElementById('sendRequestBtn');
+
+  function openModal(inv) {
+    document.getElementById('modalAvatar').textContent = inv.name.charAt(0).toUpperCase();
+    document.getElementById('modalInvestorName').textContent = inv.name;
+    document.getElementById('modalInvestorMeta').textContent = `${inv.role||'Investor'} \u00b7 ${inv.preferredSector||'General'}`;
+    document.getElementById('senderName').value  = smeName;
+    document.getElementById('messageText').value = '';
+    modalOverlay.classList.add('open');
+    sendBtn.dataset.investorName  = inv.name;
+    sendBtn.dataset.investorEmail = inv.email || '';
+  }
+  function closeModal() { modalOverlay.classList.remove('open'); }
+  document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+  document.getElementById('cancelModalBtn').addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+
+  investorGrid.addEventListener('click', e => {
+    if (e.target.classList.contains('contact-investor-btn')) openModal(investors[e.target.dataset.index]);
+  });
+
+  sendBtn.addEventListener('click', async () => {
+    const investorName  = sendBtn.dataset.investorName;
+    const investorEmail = sendBtn.dataset.investorEmail;
+    const sender  = document.getElementById('senderName').value.trim() || smeName;
+    const message = document.getElementById('messageText').value.trim();
+    if (!message) { alert('Please write a message.'); return; }
+    sendBtn.textContent = 'Sending...';
+    sendBtn.disabled = true;
+    try {
+      await db.collection('requests').add({
+        investorName, investorEmail,
+        smeName: sender, smeEmail,
+        message, date: new Date().toLocaleString(), status: 'Pending'
+      });
+      showToast(`Request sent to ${investorName}!`, 'success');
+      closeModal();
+    } catch (err) {
+      alert('Failed: ' + err.message);
+    } finally {
+      sendBtn.textContent = 'Send Request';
+      sendBtn.disabled = false;
+    }
+  });
+
+  // Load My Requests
+  async function loadMyRequests() {
+    const listEl = document.getElementById('myRequestsList');
+    listEl.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading...</p></div>';
+    try {
+      let requests = [];
+      if (smeEmail) {
+        const snap = await db.collection('requests').where('smeEmail', '==', smeEmail).get();
+        snap.forEach(doc => requests.push({ id: doc.id, ...doc.data() }));
+      }
+      if (requests.length === 0) {
+        const snap2 = await db.collection('requests').where('smeName', '==', smeName).get();
+        snap2.forEach(doc => requests.push({ id: doc.id, ...doc.data() }));
+      }
+      if (requests.length === 0) {
+        listEl.innerHTML = '<div class="no-content">&#128205; No requests yet. Browse investors and hit Connect.</div>';
+        return;
+      }
+      listEl.innerHTML = '';
+      requests.forEach(req => renderRequestCard(req, listEl));
+    } catch (err) {
+      listEl.innerHTML = '<div class="no-content">&#9888;&#65039; Could not load requests.</div>';
+    }
+  }
+
+  function renderRequestCard(req, container) {
+    const card = document.createElement('div');
+    card.className = `request-card ${req.status.toLowerCase()}`;
+    const isAccepted = req.status === 'Accepted';
+    const isDeclined = req.status === 'Declined';
+
+    card.innerHTML = `
+      <div class="req-header">
+        <h3>&rarr; <strong>${req.investorName}</strong></h3>
+        <span class="status-badge badge-${req.status}">${req.status}</span>
+      </div>
+      <p class="req-msg">"${req.message}"</p>
+      <div class="req-date">&#128197; ${req.date}</div>
+      ${isAccepted ? `
+        <div class="contact-info-box">
+          <h4>&#127881; Investor accepted your request!</h4>
+          <p>&#128231; Email: <a href="mailto:${req.investorEmail}">${req.investorEmail || 'See profile'}</a></p>
+          <p>&#128188; Reach out directly and share your pitch deck!</p>
+        </div>
+        <button class="chat-toggle-btn" onclick="toggleChat('${req.id}')">&#128172; Open Chat with ${req.investorName}</button>
+        <div class="chat-box" id="chat-${req.id}">
+          <div class="chat-messages" id="msgs-${req.id}">
+            <div style="text-align:center;color:#aaa;font-size:0.85rem;padding:1rem;">Start the conversation! &#128075;</div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chatInput-${req.id}" placeholder="Type a message..."
+              onkeydown="if(event.key==='Enter') sendChatMsg('${req.id}','${req.investorName}','${req.investorEmail}')">
+            <button onclick="sendChatMsg('${req.id}','${req.investorName}','${req.investorEmail}')">Send</button>
+          </div>
+        </div>
+      ` : isDeclined ? `
+        <p style="color:#c62828;font-size:0.9rem;margin:0;">&#10060; Declined. Try reaching out with a stronger pitch!</p>
+      ` : `
+        <p style="color:#e65100;font-size:0.85rem;margin:0;">&#8987; Awaiting investor response...</p>
+      `}
+    `;
+    container.appendChild(card);
+    if (isAccepted) loadChatMessages(req.id);
+  }
+
+  function toggleChat(reqId) {
+    const box = document.getElementById(`chat-${reqId}`);
+    box.classList.toggle('open');
+    if (box.classList.contains('open')) loadChatMessages(reqId);
+  }
+
+  function loadChatMessages(reqId) {
+    const msgsEl = document.getElementById(`msgs-${reqId}`);
+    db.collection('chats').doc(reqId).collection('messages')
+      .orderBy('timestamp')
+      .onSnapshot(snapshot => {
+        if (snapshot.empty) return;
+        msgsEl.innerHTML = '';
+        snapshot.forEach(doc => {
+          const msg = doc.data();
+          const isSelf = msg.senderEmail === smeEmail;
+          const bubble = document.createElement('div');
+          bubble.className = `chat-msg ${isSelf ? 'sent' : 'received'}`;
+          bubble.innerHTML = `
+            ${!isSelf ? `<strong style="font-size:0.78rem;display:block;margin-bottom:2px;">${msg.senderName}</strong>` : ''}
+            ${msg.text}
+            <span class="msg-time">${msg.time}</span>`;
+          msgsEl.appendChild(bubble);
+        });
+        msgsEl.scrollTop = msgsEl.scrollHeight;
+      });
+  }
+
+  async function sendChatMsg(reqId, investorName, investorEmail) {
+    const input = document.getElementById(`chatInput-${reqId}`);
+    const text = input.value.trim();
+    if (!text) return;
+    try {
+      await db.collection('chats').doc(reqId).collection('messages').add({
+        text, senderEmail: smeEmail, senderName: smeName,
+        recipientEmail: investorEmail,
+        time: new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' }),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      input.value = '';
+    } catch (err) { alert('Failed: ' + err.message); }
+  }
+
+  // Real-time notifications
+  if (smeEmail) {
+    db.collection('requests').where('smeEmail', '==', smeEmail).where('status', '==', 'Accepted')
+      .onSnapshot(snapshot => {
+        if (!snapshot.empty && !document.getElementById('tabRequests').classList.contains('active')) {
+          document.getElementById('notifDot').classList.add('show');
+          showToast('An investor accepted your request!', 'success');
+        }
+      });
+  }
 </script>
 </body>
 </html>

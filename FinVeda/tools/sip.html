@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
   <meta charset="utf-8" />
   <title>Tools - GrowWise</title>
-  <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" href="/assets/images/favicon2.webp" type="image/png" />
-
   <link rel="stylesheet" href="../assets/css/animate.css" />
   <link rel="stylesheet" href="../assets/css/magnific-popup.css" />
   <link rel="stylesheet" href="../assets/css/slick.css" />
@@ -19,266 +16,515 @@
   <link rel="stylesheet" href="../assets/css/quiz.css" />
   <link rel="stylesheet" href="../assets/css/popup.css" />
   <link rel="stylesheet" href="../assets/css/index.css" />
-
   <link rel="stylesheet" href="GSTstyle.css" />
   <link rel="stylesheet" type="text/css" href="sipcalculator.css">
   <link rel="stylesheet" href="../assets/css/sip.css" />
-  <link rel="stylesheet" href="GSTstyle.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <!-- Added the navbar.css file here so that the navbar looks nice and uniform in all pages -->
-  <link rel="stylesheet" href="navbar.css">
-
-</head>
-
-<style>
-  #progressBar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 8px;
-    background-color: #f76b45;
-    z-index: 9999;
-  }
-
-  * {
-    cursor: url('/assets/images/ads_click_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg'), auto;
-  }
-
-
-  .circle {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    pointer-events: none;
-    background: radial-gradient(circle, rgba(73, 232, 247, 0.466), rgba(141, 38, 172, 0.5));
-    transition: transform 0.1s, left 0.1s, top 0.1s;
-  }
-
-  .circle-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  @media (max-width: 720px) {
-    .circle-container {
-      display: none;
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* RESET ALL MARGINS AND PADDING */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  }
 
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden !important;
+    }
 
-  .unique-popup-message {
-    position: fixed;
-    top: 30px;
-    right: 2px;
-    width: 300px;
-    transform: translateX(0);
-    background-color: #a4d8ff;
-    color: #131722;
-    padding: 11px;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 1000;
-    box-sizing: border-box;
-    overflow: hidden;
-    position: relative;
-  }
+    /* ============================================================
+       SCOPED HEADER — .site-header & .hdr-* prefix only
+    ============================================================ */
+    .site-header{background-color:#0a0a0a!important;width:100%;position:sticky;top:0;z-index:99999;border-bottom:2px solid #1e1e1e;box-shadow:0 2px 24px rgba(0,0,0,.7)}
+    .site-header .hdr-inner{max-width:1400px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px}
+    .site-header .hdr-logo a{display:flex;align-items:center;text-decoration:none!important}
+    .site-header .hdr-logo img{height:52px;width:auto;max-width:190px;object-fit:contain;display:block}
+    .site-header .hdr-logo-fallback{display:none;align-items:center;gap:10px}
+    .site-header .hdr-logo-fallback .hdr-lb{width:46px;height:46px;background:#f76b45;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:1.4rem;color:#000}
+    .site-header .hdr-logo-fallback .hdr-lw{display:flex;flex-direction:column;line-height:1}
+    .site-header .hdr-logo-fallback .hdr-lw span:first-child{font-family:"Barlow Condensed",sans-serif;font-size:.6rem;font-weight:700;letter-spacing:3px;color:#f76b45;text-transform:uppercase}
+    .site-header .hdr-logo-fallback .hdr-lw span:last-child{font-family:"Barlow Condensed",sans-serif;font-size:1.8rem;font-weight:900;color:#f76b45;text-transform:uppercase;letter-spacing:2px}
+    .site-header .hdr-nav{display:flex;align-items:center;list-style:none;gap:0}
+    .site-header .hdr-nav .hdr-item{display:flex;align-items:center;position:relative;height:72px}
+    .site-header .hdr-nav .hdr-link{font-family:"Barlow Condensed",sans-serif!important;font-weight:700!important;font-size:.96rem!important;letter-spacing:1.3px!important;text-transform:uppercase!important;color:#fff!important;text-decoration:none!important;padding:0 14px!important;height:72px;display:flex!important;align-items:center!important;gap:6px;white-space:nowrap;position:relative;transition:color .18s ease;background:transparent!important;border:none!important;box-shadow:none!important;cursor:pointer;outline:none!important}
+    .site-header .hdr-nav .hdr-link::after{content:"";position:absolute;bottom:0;left:14px;right:14px;height:3px;background:#f76b45;border-radius:2px 2px 0 0;transform:scaleX(0);transition:transform .2s ease}
+    .site-header .hdr-nav .hdr-item:hover .hdr-link{color:#f76b45!important}
+    .site-header .hdr-nav .hdr-item:hover .hdr-link::after{transform:scaleX(1)}
+    .site-header .hdr-drop-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:5px;background:rgba(247,107,69,.15);border:1px solid rgba(247,107,69,.35);flex-shrink:0;transition:background .2s}
+    .site-header .hdr-drop-icon svg{width:10px;height:10px;transition:transform .25s ease}
+    .site-header .hdr-item.hdr-has-drop:hover .hdr-drop-icon,.site-header .hdr-item.hdr-has-drop.open .hdr-drop-icon{background:rgba(247,107,69,.3)}
+    .site-header .hdr-item.hdr-has-drop:hover .hdr-drop-icon svg,.site-header .hdr-item.hdr-has-drop.open .hdr-drop-icon svg{transform:rotate(180deg)}
+    .site-header .hdr-dropdown{position:absolute;top:calc(100% + 2px);left:0;background:#111;border:1px solid #2a2a2a;border-top:2px solid #f76b45;border-radius:0 0 10px 10px;padding:6px 0;min-width:150px;box-shadow:0 20px 40px rgba(0,0,0,.7);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all .2s ease;z-index:999999;list-style:none;display:block!important}
+    .site-header .hdr-item.hdr-has-drop:hover .hdr-dropdown,.site-header .hdr-item.hdr-has-drop.open .hdr-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+    .site-header .hdr-dropdown li{list-style:none}
+    .site-header .hdr-dropdown li a{display:block!important;padding:11px 22px!important;font-family:"Barlow Condensed",sans-serif!important;font-weight:700!important;font-size:.88rem!important;letter-spacing:1px!important;text-transform:uppercase!important;color:#ccc!important;text-decoration:none!important;background:transparent!important;border:none!important;box-shadow:none!important;transition:all .15s ease;white-space:nowrap}
+    .site-header .hdr-dropdown li a:hover{background:#f76b45!important;color:#000!important;padding-left:28px!important}
+    .site-header .hdr-login{font-family:"Barlow Condensed",sans-serif!important;font-weight:800!important;font-size:1rem!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#fff!important;background:linear-gradient(135deg,#f76b45 0%,#e8522a 100%)!important;border:none!important;border-radius:50px!important;padding:0 24px!important;height:44px;display:inline-flex!important;align-items:center!important;gap:8px;text-decoration:none!important;white-space:nowrap;box-shadow:0 4px 18px rgba(247,107,69,.45),inset 0 1px 0 rgba(255,255,255,.15)!important;transition:all .2s ease;cursor:pointer;margin-left:8px;flex-shrink:0}
+    .site-header .hdr-login:hover{background:linear-gradient(135deg,#ff8060 0%,#f76b45 100%)!important;transform:translateY(-2px)!important;box-shadow:0 8px 28px rgba(247,107,69,.6)!important;color:#fff!important;text-decoration:none!important}
+    .site-header .hdr-login .hdr-btn-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(255,255,255,.2);border-radius:4px;flex-shrink:0}
+    .site-header .hdr-toggle{width:46px!important;height:46px!important;border-radius:50%!important;background:#1a1a1a!important;border:2px solid #2e2e2e!important;color:#fff;font-size:1.2rem;display:flex!important;align-items:center!important;justify-content:center!important;cursor:pointer;transition:all .2s ease;margin-left:8px;flex-shrink:0;box-shadow:none!important;padding:0!important}
+    .site-header .hdr-toggle:hover{background:rgba(247,107,69,.2)!important;border-color:#f76b45!important;transform:rotate(15deg)!important}
+    @media(max-width:1200px){.site-header .hdr-nav .hdr-link{padding:0 9px!important;font-size:.85rem!important}.site-header .hdr-inner{padding:0 18px}}
+    @media(max-width:960px){.site-header .hdr-inner{flex-wrap:wrap;height:auto;padding:10px 16px}.site-header .hdr-nav{flex-wrap:wrap;gap:2px;margin-top:6px;width:100%}.site-header .hdr-nav .hdr-item{height:42px}.site-header .hdr-nav .hdr-link{height:42px!important}}
 
-  .border-animation {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 7px;
-    background-color: rgb(4, 0, 128);
-    width: 100%;
-    transform-origin: right;
-  }
+    /* ===== MAIN PAGE STYLES ===== */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #f0f4f8 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+    
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 8px;
+      background-color: #f76b45;
+      z-index: 9998;
+    }
 
-  @keyframes borderAnimation {
-    from {
+    h1 {
+      width: 100%;
+      padding: 60px 20px 30px;
+      color: #0d47a1;
+      font-size: 2.8rem;
+      text-align: center;
+      font-weight: 700;
+      position: relative;
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, transparent, #f76b45, transparent);
+      border-radius: 2px;
+    }
+
+    /* ===== TOOLS GRID SECTION ===== */
+    .tools-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 60px;
+      width: 100%;
+    }
+
+    @media (max-width: 1200px) {
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      h1 {
+        font-size: 2rem;
+        padding: 40px 20px 20px;
+      }
+      .tools-container {
+        margin: 40px auto;
+      }
+    }
+
+    /* ===== TOOL CARD STYLES ===== */
+    .tool-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f76b45, #ff9d6e);
       transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
     }
 
-    to {
+    .tool-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+      border-color: #f76b45;
+    }
+
+    .tool-card:hover::before {
       transform: scaleX(1);
     }
-  }
 
-  .social-icons {
+    .tool-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0d47a1;
+      margin: 0 0 12px 0;
+      line-height: 1.3;
+    }
 
-    text-align: left;
-  }
+    .tool-card p {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
+      flex-grow: 1;
+    }
 
-  .social-icons a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 2.1rem;
-    height: 2.1rem;
-    background-color: transparent;
-    border: 0.2rem solid #0890ff;
-    font-size: 1.1rem;
-    border-radius: 50%;
-    margin: 1rem 0.5rem 0.5rem 0;
-    transition: 0.3s ease;
-    color: #55ff00;
-    text-align: left;
-  }
+    /* ===== BUTTON CONTAINER ===== */
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: auto;
+    }
 
-  .social-icons a:hover {
-    color: rgb(139, 249, 12);
-    transform: scale(1.3) translateY(-5px);
-    background-color: #0048ff;
-    box-shadow: 0 0 25px #03133c;
-  }
+    .btn-know-more, .btn-open-calc {
+      flex: 1;
+      padding: 11px 18px;
+      border: none;
+      border-radius: 24px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: 'Poppins', sans-serif;
+    }
 
+    .btn-know-more {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      color: #0d47a1;
+      border: 2px solid #0d47a1;
+    }
 
-  .or-sign-in-with {
-    margin: 20px 0;
-    font-size: 14px;
-    font-weight: bold;
-    color: #666;
-    text-align: center;
-    position: relative;
-  }
+    .btn-know-more:hover {
+      background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+      color: white;
+      transform: translateY(-2px);
+    }
 
-  .or-sign-in-with::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 35%;
-    border-top: 1px solid #ccc;
-    transform: translateX(-2%);
-  }
+    .btn-open-calc {
+      background: linear-gradient(135deg, #f76b45 0%, #ff9d6e 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(247, 107, 69, 0.35);
+    }
 
-  .or-sign-in-with::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 35%;
-    border-top: 1px solid #ccc;
-    transform: translateX(2%);
-  }
+    .btn-open-calc:hover {
+      background: linear-gradient(135deg, #ff9d6e 0%, #f76b45 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(247, 107, 69, 0.45);
+    }
 
-  .form-check {
-    display: flex;
-    align-items: center;
-  }
+    /* ===== MODAL STYLES ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 10000;
+      animation: fadeInOverlay 0.3s ease;
+    }
 
-  .form-check a {
-    margin-left: auto;
-  }
+    .modal-overlay.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  li {
-    color: black;
-  }
+    @keyframes fadeInOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-  ol li {
-    color: #131722;
-  }
-</style>
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-<script src="cal.js" defer></script>
-<script src="contributor.js" defer></script>
-<script src="creditcardpayoff.js" defer></script>
-<script src="emiCalculator.js" defer></script>
-<script src="EPFCalculator.js" defer></script>
-<script src="expenditureandsaving.js" defer></script>
-<script src="FDCalculator.js" defer></script>
-<script src="gdp.js" defer></script>
-<script src="GSTcalc.js" defer></script>
-<script src="IncomeTax.js" defer></script>
-<script src="insuranceCalculator.js" defer></script>
-<script src="nvpCalculator.js" defer></script>
-<script src="ProfitMargin.js" defer></script>
-<script src="RDCalculator.js" defer></script>
-<script src="roiCalculator.js" defer></script>
-<script src="SavingsGoalCalculator.js" defer></script>
-<script src="sipcalculatorJs.js" defer></script>
-<script src="smoothScroll.js" defer></script>
-<script src="SWPCalculator.js" defer></script>
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 3px solid #f76b45;
+      padding-bottom: 16px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      color: #0d47a1;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #999;
+      cursor: pointer;
+      transition: color 0.2s;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      color: #f76b45;
+    }
+
+    .modal-body h3 {
+      color: #1565c0;
+      font-size: 1.15rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .modal-body ol {
+      padding-left: 24px;
+      margin: 0;
+    }
+
+    .modal-body li {
+      margin-bottom: 14px;
+      color: #555;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .modal-body li b {
+      color: #0d47a1;
+      font-weight: 700;
+    }
+
+    /* ===== CALCULATOR SECTION ===== */
+    .calculator-section {
+      display: none;
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .calculator-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .input-container {
+      margin-bottom: 22px;
+    }
+
+    .input-container label {
+      font-weight: 600;
+      color: #0d47a1;
+      margin-bottom: 8px;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #f76b45;
+      box-shadow: 0 0 0 4px rgba(247, 107, 69, 0.15);
+      outline: none;
+    }
+
+    .button-group-calc {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn-calculate, .btn-clear {
+      flex: 1;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-calculate {
+      background: linear-gradient(135deg, #f76b45 0%, #ff9d6e 100%);
+      color: white;
+      box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-calculate:hover {
+      background: linear-gradient(135deg, #ff9d6e 0%, #f76b45 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.45);
+    }
+
+    .btn-clear {
+      background: #e3f2fd;
+      color: #0d47a1;
+      border: 2px solid #0d47a1;
+    }
+
+    .btn-clear:hover {
+      background: #0d47a1;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .result-container {
+      background: #f5f9ff;
+      border-left: 5px solid #f76b45;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .result-container div {
+      margin-bottom: 12px;
+    }
+
+    .result-container span {
+      color: #f76b45;
+      font-weight: 700;
+    }
+
+    /* ===== CIRCLE CURSOR ANIMATION ===== */
+    .circle {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(73, 232, 247, 0.466), rgba(141, 38, 172, 0.5));
+      transition: transform 0.1s, left 0.1s, top 0.1s;
+    }
+
+    .circle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @media (max-width: 720px) {
+      .circle-container { display: none; }
+    }
+  </style>
+</head>
 
 <body>
-
+  <!-- Cursor circles -->
   <div class="circle-container">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
+    <div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    <div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    <div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    <div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    <div class="circle"></div><div class="circle"></div><div class="circle"></div>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const coords = { x: 0, y: 0 };
       const circles = document.querySelectorAll(".circle");
-
-      circles.forEach(function (circle) {
-        circle.x = 0;
-        circle.y = 0;
+      circles.forEach(function (circle) { circle.x = 0; circle.y = 0; });
+      window.addEventListener("mousemove", function (e) { 
+        coords.x = e.pageX; 
+        coords.y = e.pageY - window.scrollY; 
       });
-
-      window.addEventListener("mousemove", function (e) {
-        coords.x = e.pageX;
-        coords.y = e.pageY - window.scrollY; // Adjust for vertical scroll position
-      });
-
       function animateCircles() {
-        let x = coords.x;
-        let y = coords.y;
-
+        let x = coords.x; let y = coords.y;
         circles.forEach(function (circle, index) {
-          circle.style.left = `${x - 12}px`;
-          circle.style.top = `${y - 12}px`;
-          circle.style.transform = `scale(${(circles.length - index) / circles.length})`;
-
+          circle.style.left = (x - 12) + "px"; 
+          circle.style.top = (y - 12) + "px";
+          circle.style.transform = "scale(" + ((circles.length - index) / circles.length) + ")";
           const nextCircle = circles[index + 1] || circles[0];
-          circle.x = x;
-          circle.y = y;
-
-          x += (nextCircle.x - x) * 0.3;
+          circle.x = x; circle.y = y;
+          x += (nextCircle.x - x) * 0.3; 
           y += (nextCircle.y - y) * 0.3;
         });
-
         requestAnimationFrame(animateCircles);
       }
-
       animateCircles();
     });
-
   </script>
 
   <div id="progressBar"></div>
@@ -290,1943 +536,1019 @@
       document.getElementById("progressBar").style.width = scrolled + "%";
     };
   </script>
-  <div class="preloader">
-    <div class="loader">
-      <div class="ytp-spinner">
-        <div class="ytp-spinner-container">
-          <div class="ytp-spinner-rotator">
-            <div class="ytp-spinner-left">
-              <div class="ytp-spinner-circle"></div>
-            </div>
-            <div class="ytp-spinner-right">
-              <div class="ytp-spinner-circle"></div>
-            </div>
+
+  <!-- NEW HEADER -->
+  <header class="site-header">
+    <div class="hdr-inner">
+      <div class="hdr-logo">
+        <a href="../index.html">
+          <img src="../assets/images/Growwise.png" alt="GROWWISE SME"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="hdr-logo-fallback">
+            <div class="hdr-lb">G</div>
+            <div class="hdr-lw"><span>Growwise</span><span>SME</span></div>
           </div>
+        </a>
+      </div>
+      <ul class="hdr-nav">
+        <li class="hdr-item"><a class="hdr-link" href="../index.html">Home</a></li>
+        <li class="hdr-item"><a class="hdr-link" href="../about.html">Loans and Schemes</a></li>
+        <li class="hdr-item"><a class="hdr-link" href="../courses.html">Courses</a></li>
+        <li class="hdr-item"><a class="hdr-link" href="../contact.html">Investor Contact</a></li>
+        <li class="hdr-item"><a class="hdr-link" href="../faq.html">Help</a></li>
+        <li class="hdr-item hdr-has-drop">
+          <a class="hdr-link" href="#">Explore
+            <span class="hdr-drop-icon">
+              <svg viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L5 5L9 1" stroke="#f76b45" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+          <ul class="hdr-dropdown">
+            <li><a href="../tools/sip.html">Tools</a></li>
+            <li><a href="../blog.html">Blogs</a></li>
+          </ul>
+        </li>
+        <li class="hdr-item" id="auth-btn-container">
+          <a class="hdr-login" href="../loginPage.html">Login / Register
+            <span class="hdr-btn-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <rect x="1" y="1" width="10" height="10" rx="2" stroke="white" stroke-width="1.5"/>
+                <path d="M4 6h4M6 4l2 2-2 2" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </a>
+        </li>
+        <li class="hdr-item">
+          <button id="theme-toggle" class="hdr-toggle" aria-label="Toggle dark mode">🌙</button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <script>
+    document.querySelectorAll(".site-header .hdr-item.hdr-has-drop > .hdr-link").forEach(function(link){
+      link.addEventListener("click",function(e){
+        e.preventDefault();
+        var p=this.closest(".hdr-item.hdr-has-drop");
+        var o=p.classList.contains("open");
+        document.querySelectorAll(".site-header .hdr-item.hdr-has-drop").forEach(function(el){el.classList.remove("open");});
+        if(!o)p.classList.add("open");
+      });
+    });
+    document.addEventListener("click",function(e){
+      if(!e.target.closest(".site-header .hdr-item.hdr-has-drop"))
+        document.querySelectorAll(".site-header .hdr-item.hdr-has-drop").forEach(function(el){el.classList.remove("open");});
+    });
+    (function(){
+      var t=document.getElementById("theme-toggle"),b=document.body;
+      if(localStorage.getItem("theme")==="dark"){b.classList.add("dark-mode");t.textContent="☀️";}
+      t.addEventListener("click",function(){
+        b.classList.toggle("dark-mode");
+        if(b.classList.contains("dark-mode")){t.textContent="☀️";localStorage.setItem("theme","dark");}
+        else{t.textContent="🌙";localStorage.setItem("theme","light");}
+      });
+    })();
+  </script>
+
+  <!-- MAIN CONTENT -->
+  <h1>Tools - GrowWise</h1>
+
+  <div class="tools-container">
+    <div class="tools-grid">
+      <!-- Tool 1: Mutual Fund Calculator -->
+      <div class="tool-card">
+        <h3>Mutual Fund Investment Calculator</h3>
+        <p>Estimate your potential returns for SIP or LumpSum investments.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-mutual-fund')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('mutualFundCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 2: EMI Calculator -->
+      <div class="tool-card">
+        <h3>EMI Calculator</h3>
+        <p>Calculate the monthly installment amount for a loan.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-emi')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('emiCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 3: Savings Goal Calculator -->
+      <div class="tool-card">
+        <h3>Savings Goal Calculator</h3>
+        <p>Determine how much to save monthly to reach your goals.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-savings-goal')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('savingsGoalCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 4: Insurance Calculator -->
+      <div class="tool-card">
+        <h3>Insurance Calculator</h3>
+        <p>Estimate insurance policy benefits based on inputs.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-insurance')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('insuranceCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 5: NPV Calculator -->
+      <div class="tool-card">
+        <h3>Net Present Value Calculator</h3>
+        <p>Evaluate the profitability of an investment by calculating the present value of expected future cash flows.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-npv')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('npvCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 6: ROI Calculator -->
+      <div class="tool-card">
+        <h3>Return on Investment (ROI) Calculator</h3>
+        <p>The ROI Calculator helps you measure the profitability of an investment.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-roi')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('roiCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 7: GST Calculator -->
+      <div class="tool-card">
+        <h3>Goods and Service Tax (GST) Calculator</h3>
+        <p>This tool simplifies the calculation of GST for various transactions.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-gst')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('gstCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 8: Profit Margin Calculator -->
+      <div class="tool-card">
+        <h3>Profit Margin Calculator</h3>
+        <p>This calculates the profit margin percentage based on the revenue and cost inputs.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-profit-margin')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('profitmarginCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 9: Expenditure and Savings Calculator -->
+      <div class="tool-card">
+        <h3>Expenditure and Savings Calculator</h3>
+        <p>This Calculator helps you analyze your monthly savings based on your income and expenses.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-exp-sav')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('expsavCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 10: Credit Card Payoff Calculator -->
+      <div class="tool-card">
+        <h3>Credit Card Payoff Calculator</h3>
+        <p>Calculate how long it will take to pay off your credit card balance with this calculator.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-credit-card')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('creditcardCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 11: Fixed Deposit Calculator -->
+      <div class="tool-card">
+        <h3>Fixed Deposit Calculator</h3>
+        <p>It computes the maturity amount and interest earned on fixed deposits.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-fd')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('fdCalculator')">Open Calculator</button>
+        </div>
+      </div>
+
+      <!-- Tool 12: Recurring Deposit Calculator -->
+      <div class="tool-card">
+        <h3>Recurring Deposit Calculator</h3>
+        <p>It computes the maturity amount and interest earned on regular monthly deposits over a fixed period.</p>
+        <div class="button-group">
+          <button class="btn-know-more" onclick="openModal('modal-rd')">Know More</button>
+          <button class="btn-open-calc" onclick="openCalculator('rdCalculator')">Open Calculator</button>
         </div>
       </div>
     </div>
   </div>
 
-  <header class="header-area">
-    <div class="navbar-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <nav class="navbar navbar-expand-lg">
+  <!-- ===== MODALS ===== -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">How It Works</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
 
-              <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                <div class="icon1">
-                  <a href="./index.html">
-                    <img src="../assets/images/Growwise.png" alt="icon.png" style="width: 13rem;">
-                  </a>
-                </div>
-                <ul id="nav" class="navbar-nav ml-auto" style="margin: auto;">
-                  <li class="nav-item">
-                    <a class="page-scroll" href="../index.html" style="color: rgb(237, 242, 244);">Home
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="page-scroll" href="../about.html" style="color: rgb(237, 242, 244);">Loans and Schemes </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="page-scroll" href="../courses.html" style="color: rgb(237, 242, 244);">Courses </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="page-scroll" href="../contact.html" style="color: rgb(237, 242, 244);">Investor Contact</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="page-scroll" href="../faq.html" style="color: rgb(237, 242, 244);">Help </a>
-                  </li>
-                  <!-- Dropdown for Explore -->
-                  <li class="nav-item dropdown" onmouseover="toggleDropdown(true)" onmouseout="toggleDropdown(false)">
-                    <a class="page-scroll dropdown-toggle" href="#" style="color: rgb(237, 242, 244);">
-                      <span class="explore-text">Explore 📚</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                    
-                      <li><a href="./tools/sip.html">Tools </a></li>
-                      <li><a href="../blog.html">Blogs </a></li>
-                      
-                    </ul>
-                  </li>
+  <!-- ===== CALCULATOR SECTIONS ===== -->
 
-                  <!-- Navigation item placeholder for Login/Register or Logout button -->
-                  <li class="nav-item no-underline" id="auth-btn-container">
-                    <a class="main-btn navbar-btn"
-                      style="padding: 2px 20px; color: rgb(237, 242, 244); animation-duration: 0.4s; animation-name: ease;"
-                      data-scroll-nav="0" href="./loginPage.html">Login/Register </a>
-                  </li>
-
-                  
-                    <!-- Profile Icon -->
-                    <li class="nav-item no-underline">
-                      <a href="./profile.html" class="profile-link" style="display: flex; align-items: center; text-decoration: none;">
-                      <img src="https://i.postimg.cc/NFFmtc9K/xnz-Mst5-V-400x400.jpg" alt="Profile Icon" style="width: 50px; height: 50px; border-radius: 50%; margin-top: -17px;">
-                     </a>
-                 </li>
-
-                 <style>
-                   /* Override the existing hover styles */
-                   .navbar-nav .nav-item .profile-link:hover {
-                       background-color: transparent !important; /* Remove background color */
-                       border-radius: 0 !important; /* Reset border radius */
-                       transform: none !important; /* Prevent scaling */
-                   }
-                 </style>
-
-                 <li class="nav-item no-underline">
-                   <button id="theme-toggle" class="theme-toggle" style="margin-right: 2px;">
-                     🌙
-                   </button>
-                 </li>
-               </ul>
-             </div>
-
-             <script>
-               function toggleMenu() {
-                   const menu = document.getElementById('profileMenu');
-                   menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-               }
-
-               // Close the dropdown if the user clicks outside of it
-               window.onclick = function(event) {
-                   if (!event.target.matches('.profile-icon img')) {
-                       const menu = document.getElementById('profileMenu');
-                       if (menu.style.display === 'block') {
-                           menu.style.display = 'none';
-                       }
-                   }
-               }
-           </script>
-
-
-              <script>
-                const toggleButton = document.getElementById('theme-toggle');
-                const body = document.body;
-                const currentTheme = localStorage.getItem('theme');
-
-                if (currentTheme === 'dark') {
-                  body.classList.add('dark-mode');
-                  toggleButton.classList.add('dark');
-                  toggleButton.textContent = '🌞';
-                }
-
-                toggleButton.addEventListener('click', function () {
-                  body.classList.toggle('dark-mode');
-                  toggleButton.classList.toggle('dark');
-
-                  // Update button icon based on mode
-                  if (body.classList.contains('dark-mode')) {
-                    toggleButton.textContent = '🌞';  // Light mode icon
-                    localStorage.setItem('theme', 'dark');
-                  } else {
-                    toggleButton.textContent = '🌙';  // Dark mode icon
-                    localStorage.setItem('theme', 'light');
-                  }
-                });
-              </script>
-          </nav>
-              <!-- Login Modal -->
-              <div id="myModal" class="modal">
-                <div class="modal-content">
-                  <span class="close" style="display: flex; justify-content: right;">&times;</span>
-                  <div class="mt-3">
-                    <h3 class="join"><i class="fa-solid fa-right-to-bracket"></i> Login to join us....</h3>
-                    <form class="px-3 py-4" id="loginForm">
-                      <div class="form-group">
-                        <label class="d-flex">Username</label>
-                        <input type="text" placeholder="Username" class="form-control" required />
-                      </div>
-                      <div class="form-group">
-                        <label class="d-flex">Password</label>
-                        <input type="password" placeholder="Password" class="form-control" required>
-                        <button type="button" class="toggle-password-btn"><i class="fa-solid fa-eye"></i></button>
-                      </div>
-                      <div class="form-check d-flex">
-                        <input type="checkbox" class="form-check-input me-1" style="margin-top: 0;">
-                        <label class="form-check-label" style="margin-bottom: 0;">Remember me</label>
-                        <a href="#" id="forgot-password" style="margin-left: 90px;">Forget Password?</a>
-                      </div>
-                      <div style="height: 20px;"></div>
-                      <button class="main-btn w-100 mb-3" onclick="submitForm('loginForm')">Sign in</button>
-                      <p class="text-center">Don't have an account? <a href="#" id="registerLink">Register</a></p>
-                      <div class="or-sign-in-with text-center">
-                        <p>Or sign in with</p>
-                      </div>
-                      <div class="social-icons mt-3">
-                        <ul class="list-inline">
-                          <li><a href="#" class="google" id="google-login"><i class="fa-brands fa-google"></i></a></li>
-                          <li><a href="#" class="facebook" id="facebook-login"><i
-                                class="fa-brands fa-facebook-f"></i></a></li>
-                          <li><a href="#" class="twitter" id="twitter-login"><i class="fa-brands fa-x-twitter"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <script>
-                // Add event listeners to the social media icons
-                document.getElementById('google-login').addEventListener('click', function () {
-                  window.location.href = 'https://accounts.google.com/o/oauth2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=profile email';
-                });
-
-                document.getElementById('facebook-login').addEventListener('click', function () {
-                  window.location.href = 'https://www.facebook.com/v13.0/dialog/oauth?client_id=YOUR_APP_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=public_profile email';
-                });
-
-                document.getElementById('twitter-login').addEventListener('click', function () {
-                  window.location.href = 'https://twitter.com/i/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=users.read';
-                });
-              </script>
-
-              <!-- Register Modal -->
-              <div id="registerModal" class="modal">
-                <div class="modal-content">
-                  <span class="close" style="display: flex; justify-content: right;">&times;</span>
-                  <div class="mt-3">
-                    <h3 class="join"><i class="fa-solid fa-user"></i> Register to join us....</h3>
-                    <form class="px-3 py-4" id="registerForm">
-                      <div class="form-group">
-                        <label class="d-flex">Email</label>
-                        <input type="email" placeholder="Email" class="form-control" required />
-                      </div>
-                      <div class="form-group">
-                        <label class="d-flex">Username</label>
-                        <input type="text" placeholder="Username" class="form-control" required />
-                      </div>
-                      <div class="form-group">
-                        <label class="d-flex">Password</label>
-                        <input type="password" placeholder="Password" class="form-control" id="register-password"
-                          required oninput="checkPasswordStrength()">
-                        <button type="button" class="toggle-password-btn"
-                          onclick="togglePasswordVisibility('register-password')">
-                          <i class="fa-solid fa-eye"></i>
-                          <i class="fa-solid fa-eye-slash" style="display: none;"></i>
-                        </button>
-                      </div>
-                      <div id="password-meter" style="display: none; margin-top: 5px;">
-                        <div id="meter"
-                          style="height: 10px; background-color: #ccc; border-radius: 5px; transition: width 0.3s;">
-                        </div>
-                        <div id="strength-text" style="margin-top: 5px; font-weight: bold;"></div>
-                      </div>
-                    </form>
-
-                    <!-- Import zxcvbn library -->
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
-                    <script>
-                      function checkPasswordStrength() {
-                        const password = document.getElementById('register-password').value;
-                        const meter = document.getElementById('meter');
-                        const meterContainer = document.getElementById('password-meter');
-                        const strengthText = document.getElementById('strength-text');
-
-                        if (password) {
-                          meterContainer.style.display = 'block'; // Show the meter when typing
-                          const result = zxcvbn(password);
-                          const score = result.score; // Score ranges from 0 to 4
-
-                          // Set meter width and color based on score
-                          meter.style.width = (score + 1) * 20 + '%'; // Convert score to percentage
-                          meter.style.backgroundColor = getMeterColor(score);
-                          strengthText.innerText = getStrengthText(score); // Update strength text
-                        } else {
-                          meterContainer.style.display = 'none'; // Hide the meter if no password
-                          strengthText.innerText = ''; // Clear strength text
-                        }
-                      }
-
-                      function getMeterColor(score) {
-                        switch (score) {
-                          case 0: return 'red'; // Weak
-                          case 1: return 'orange'; // Fair
-                          case 2: return 'yellow'; // Good
-                          case 3: return 'blue'; // Strong
-                          case 4: return 'green'; // Very Strong
-                          default: return 'gray';
-                        }
-                      }
-
-                      function getStrengthText(score) {
-                        switch (score) {
-                          case 0: return 'Very Weak';
-                          case 1: return 'Weak';
-                          case 2: return 'Fair';
-                          case 3: return 'Strong';
-                          case 4: return 'Very Strong';
-                          default: return '';
-                        }
-                      }
-
-                      function togglePasswordVisibility(id) {
-                        const passwordInput = document.getElementById(id);
-                        const eyeIcon = passwordInput.nextElementSibling;
-                        if (passwordInput.type === 'password') {
-                          passwordInput.type = 'text';
-                          eyeIcon.children[0].style.display = 'none';
-                          eyeIcon.children[1].style.display = 'inline';
-                        } else {
-                          passwordInput.type = 'password';
-                          eyeIcon.children[0].style.display = 'inline';
-                          eyeIcon.children[1].style.display = 'none';
-                        }
-                      }
-                    </script>
-
-                    <button class="main-btn mt-2 w-100 mb-3" onclick="submitForm('registerForm')">Register</button>
-                    <p class="text-center">Already have an account? <a href="#" id="loginLink">Login</a></p>
-                    <div class="or-sign-in-with text-center">
-                      <p>Or sign up with</p>
-                    </div>
-                    <div class="social-icons mt-3">
-                      <ul class="list-inline">
-                        <li><a href="#" class="google" id="google-signup"><i class="fa-brands fa-google"></i></a></li>
-                        <li><a href="#" class="facebook" id="facebook-signup"><i
-                              class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#" class="twitter" id="twitter-signup"><i class="fa-brands fa-twitter"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <script>
-                // Add event listeners to the social media icons
-                document.getElementById('google-signup').addEventListener('click', function () {
-                  window.location.href = 'https://accounts.google.com/o/oauth2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=profile email';
-                });
-
-                document.getElementById('facebook-signup').addEventListener('click', function () {
-                  window.location.href = 'https://www.facebook.com/v13.0/dialog/oauth?client_id=YOUR_APP_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=public_profile email';
-                });
-
-                document.getElementById('twitter-signup').addEventListener('click', function () {
-                  window.location.href = 'https://twitter.com/i/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=users.read';
-                });
-                // Add event listener to the "Register" button in the login modal
-                document.getElementById('registerLink').addEventListener('click', function () {
-                  // Close the login modal
-                  document.getElementById('myModal').style.display = 'none';
-
-                  // Open the registration modal
-                  document.getElementById('registerModal').style.display = 'block';
-                });
-                // Add event listener to the "Login" button in the registration modal
-                document.getElementById('loginLink').addEventListener('click', function () {
-                  // Close the registration modal
-                  document.getElementById('registerModal').style.display = 'none';
-
-                  // Open the login modal
-                  document.getElementById('myModal').style.display = 'block';
-                });
-                // Function to close the modal window
-                var loginCloseButton = document.querySelector("#myModal .close");
-                loginCloseButton.addEventListener("click", function () {
-                  var modal = document.getElementById("myModal");
-                  modal.style.display = "none";
-                });
-
-                var registerCloseButton = document.querySelector("#registerModal .close");
-                registerCloseButton.addEventListener("click", function () {
-                  var modal = document.getElementById("registerModal");
-                  modal.style.display = "none";
-                });
-              </script>
-          </div>
-
-
-          <nav class="mobile-menu ">
-            <a class="page-scroll" href="../index.html">Home </a>
-            <a class="page-scroll " href="../about.html">About Us </a>
-         
-            <a class="page-scroll active-link" href="../tools/sip.html">Tools </a>
-            <a class="page-scroll" href="../blog.html">Blogs </a>
-            <a class="page-scroll main-btn" href="#" onclick="openModal()"
-              onmouseout="this.style.color='white'">Login/Register </a>
-            <div class="mobile-menu__trigger" onclick="toggleMobileMenu()">
-              <span></span>
-            </div>
-          </nav>
-
-
-          <link href="../navbar.css" rel="stylesheet">
-          <script type="text/javascript" src="../navbar.js"></script>
-        </div>
+  <!-- Mutual Fund Calculator -->
+  <div id="mutualFundCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Mutual Fund Investment Calculator</h2>
+    <div class="input-container">
+      <label>Investment Type</label>
+      <div style="display:flex;gap:16px;margin-bottom:12px;">
+        <label style="display:flex;align-items:center;gap:8px;margin:0;font-weight:500;">
+          <input type="radio" name="investmentType" value="SIP" checked> SIP
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;font-weight:500;">
+          <input type="radio" name="investmentType" value="LumpSum"> LumpSum
+        </label>
       </div>
     </div>
+    <div class="input-container">
+      <label>Monthly Investment (₹)</label>
+      <input class="form-control" id="investment" type="number" placeholder="Enter monthly investment">
     </div>
-  </header>
-
-
-  <body class="body-background">
-
-    <br><br>
-
-    <h1>Tools - GrowWise</h1>
-
-    <div class="calculator-slider">
-      <div class="slider-item" onclick="openCalculator('mutualFundCalculator')">
-        <h3>Mutual Fund Investment Calculator</h3>
-        <p>Estimate your potential returns for SIP or LumpSum investments.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Monthly Investment:</b> Enter the amount you plan to invest monthly.</li>
-              <li><b>Time Period (years):</b> Specify the number of years for the investment.</li>
-              <li><b>Expected Return Rate (p.a.):</b> Enter the annual return rate you expect.</li>
-              <li><b>Calculate:</b> Computes the total investment, wealth gained, and maturity value based on inputs.
-              </li>
-            </ol>
-          </div>
-
-        </div>
-      </div>
-      <div class="slider-item" onclick="openCalculator('emiCalculator')">
-        <h3>EMI Calculator</h3>
-        <p>Calculate the monthly installment amount for a loan.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Loan Amount</b>: Enter the principal amount of the loan.</li>
-              <li><b>Interest Rate</b>: Specify the annual interest rate.</li>
-              <li><b>Loan Tenure (months)</b>: Enter the loan period in months.</li>
-              <li><b>Calculate EMI</b>: Provides the monthly EMI, total payment, and total interest.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('savingsGoalCalculator')">
-        <h3>Savings Goal Calculator</h3>
-        <p>Determine how much to save monthly to reach your goals.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Goal Amount</b>: Enter your financial goal amount.</li>
-              <li><b>Current Savings</b>: Enter the amount you have already saved.</li>
-              <li><b>Monthly Savings</b>: Specify the amount you plan to save monthly.</li>
-              <li><b>Interest Rate</b>: Enter the expected annual interest rate.</li>
-              <li><b>Calculate Savings Goal</b>: Calculates the time needed to reach your goal.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('insuranceCalculator')">
-        <h3>Insurance Calculator</h3>
-        <p>Estimate insurance policy benefits based on inputs.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Sum assured</b>: Enter the sum assured amount.</li>
-              <li><b>Policy term</b>: Enter the policy term in years.</li>
-              <li><b>Annual premium</b>: Enter the annual premium percentage.</li>
-              <li><b>Reversionary Bonus</b>: Enter the reversionary bonus percentage.</li>
-              <li><b>Terminal Bonus</b>: Enter the terminal bonus percentage.</li>
-              <li><b>Calculate Insurance</b>: Calculates the insurance benefits based on the inputs.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('npvCalculator')">
-        <h3>Net Present Value Calculator</h3>
-        <p>
-          Evaluate the profitability of an investment by calculating the present value of expected future cash flows.
-        </p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Initial Investment:</b> Enter the amount of your initial investment. </li>
-              <li><b>Discount Rate:</b> Enter the discount rate, which represents the rate of return required to make
-                the investment worthwhile.</li>
-              <li><b>Cash Flows:</b> Add the expected cash flows for each year of the investment. You can add multiple
-                cash flow inputs for different years and remove any as needed.</li>
-              <li><b>Calculate NPV:</b> Once all inputs are provided, click the 'Calculate NPV' button to compute the
-                net present value. The result will display the NPV, indicating the potential profitability of your
-                investment.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('roiCalculator')">
-        <h3>Return on Investment(ROI) Calculator</h3>
-        <p>
-          The ROI Calculator helps you measure the profitability of an investment.
-        </p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Initial Investment</b>: Enter the initial investment amount.</li>
-              <li><b>Final Value</b>: Enter the final value of the investment.</li>
-              <li><b>Calculate ROI</b>: Determines the return on investment percentage.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('gstCalculator')">
-        <h3>Goods and Service Tax (GST) Calculator</h3>
-        <p>This tool simplifies the calculation of GST for various transactions.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Original Amount</b>: Enter the original amount before GST.</li>
-              <li><b>GST Rate</b>: Specify the GST rate.</li>
-              <li><b>Calculate GST</b>: Computes the GST-inclusive or exclusive amount.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('profitmarginCalculator')">
-        <h3>Profit Margin Calculator</h3>
-        <p>This calculates the profit margin percentage based on the revenue and cost inputs.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Cost Price</b>: Enter the cost price of the product.</li>
-              <li><b>Selling Price</b>: Enter the selling price of the product.</li>
-              <li><b>Calculate Profit Margin</b>: Computes the profit margin based on the inputs.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('expsavCalculator')">
-        <h3>Expenditure and Savings Calculator</h3>
-        <p>This Calculator helps you analyze your monthly savings based on your income and expenses.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Income</b>: Enter your total monthly income.</li>
-              <li><b>Expenses</b>: List your monthly expenses.</li>
-              <li><b>Calculate Savings</b>: Analyzes and provides your monthly savings.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-
-
-      <div class="slider-item" onclick="openCalculator('creditcardCalculator')">
-        <h3>Credit Card Payoff Calculator</h3>
-        <p>Calculate how long it will take to pay off your credit card balance with this calculator.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Credit Card Balance</b>: Enter your current credit card balance.</li>
-              <li><b>Annual Percentage Rate (APR)</b>: Input the annual interest rate on your credit card.</li>
-              <li><b>Monthly Payment</b>: Enter the amount you can pay each month.</li>
-            </ol>
-          </div>
-        </div>
-
-      
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('fdCalculator')">
-        <h3>Fixed Deposit Calculator</h3>
-        <p>It compute the maturity amount and interest earned on fixed deposits based on the principal, interest rate,
-          and duration.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Principal Amount (₹)</b>: Enter your principal amount.</li>
-              <li><b>Annual Interest Rate (%)</b>: Enter your annual interest rate.</li>
-              <li><b>Total Period (in years)</b>: Enter your total period of investment in years.</li>
-              <li><b>Total Interest Earned</b>: Analyzes and provides the total interest earned on your investment.
-              </li>
-              <li><b>Total Maturity Amount</b>: Analyzes and provides total maturity amount.</li>
-            </ol>
-          </div>
-        </div>
-
-      </div>
-      <div class="slider-item" onclick="openCalculator('rdCalculator')">
-        <h3>Recurring Deposit Calculator</h3>
-        <p>It computes the maturity amount and interest earned on regular monthly deposits over a fixed period, given a
-          specified annual interest rate.</p>
-        <div class="know-more">
-          <button class="know-more-btn">Know More</button>
-          <div class="know-more-content">
-            <h6>Here's how it works:</h6>
-            <ol>
-              <li><b>Monthly Installment (₹)</b>: Enter your monthly installment amount.</li>
-              <li><b>Annual Interest Rate (%)</b>: Enter your annual interest rate.</li>
-              <li><b>Total Period (in months)</b>: Enter your total period of investment in months.</li>
-              <li><b>Total Interest Earned</b>: Analyzes and provides the total interest earned on your investment.
-              </li>
-              <li><b>Total Maturity Amount</b>: Analyzes and provides total maturity amount.</li>
-            </ol>
-          </div>
-        </div>
-
-    
-      </div>
-
+    <div class="input-container">
+      <label>Time Period (Years)</label>
+      <input class="form-control" id="years" type="number" placeholder="Enter time period">
     </div>
+    <div class="input-container">
+      <label>Expected Return Rate (% p.a)</label>
+      <input class="form-control" id="return-rate" type="number" placeholder="Enter expected return rate">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateMutualFund()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('mutualFundCalculator')">Clear</button>
+    </div>
+    <div id="mf-result" class="result-container" style="display:none;">
+      <div><strong>Total Investment:</strong> <span id="mf-total">0</span></div>
+      <div><strong>Wealth Gained:</strong> <span id="mf-wealth">0</span></div>
+      <div><strong>Maturity Value:</strong> <span id="mf-maturity">0</span></div>
+    </div>
+  </div>
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        color: #131722;
-        background-color: #f7f9fc;
+  <!-- EMI Calculator -->
+  <div id="emiCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">EMI Calculator</h2>
+    <div class="input-container">
+      <label>Loan Amount (₹)</label>
+      <input class="form-control" id="loanAmount" type="number" placeholder="Enter loan amount">
+    </div>
+    <div class="input-container">
+      <label>Interest Rate (% p.a)</label>
+      <input class="form-control" id="interestRate" type="number" placeholder="Enter interest rate">
+    </div>
+    <div class="input-container">
+      <label>Loan Tenure (Months)</label>
+      <input class="form-control" id="loanTenure" type="number" placeholder="Enter tenure in months">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateEMI()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('emiCalculator')">Clear</button>
+    </div>
+    <div id="emi-result" class="result-container" style="display:none;">
+      <div><strong>Monthly EMI:</strong> <span id="emi-monthly">0</span></div>
+      <div><strong>Total Payment:</strong> <span id="emi-total">0</span></div>
+      <div><strong>Total Interest:</strong> <span id="emi-interest">0</span></div>
+    </div>
+  </div>
+
+  <!-- Savings Goal Calculator -->
+  <div id="savingsGoalCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Savings Goal Calculator</h2>
+    <div class="input-container">
+      <label>Goal Amount (₹)</label>
+      <input class="form-control" id="goalAmount" type="number" placeholder="Enter goal amount">
+    </div>
+    <div class="input-container">
+      <label>Current Savings (₹)</label>
+      <input class="form-control" id="currentSavings" type="number" placeholder="Enter current savings">
+    </div>
+    <div class="input-container">
+      <label>Monthly Savings (₹)</label>
+      <input class="form-control" id="monthlySavings" type="number" placeholder="Enter monthly savings">
+    </div>
+    <div class="input-container">
+      <label>Interest Rate (% p.a)</label>
+      <input class="form-control" id="savingsInterestRate" type="number" placeholder="Enter interest rate">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateSavingsGoal()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('savingsGoalCalculator')">Clear</button>
+    </div>
+    <div id="sg-result" class="result-container" style="display:none;">
+      <div id="sg-output"></div>
+    </div>
+  </div>
+
+  <!-- Insurance Calculator -->
+  <div id="insuranceCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Insurance Calculator</h2>
+    <div class="input-container">
+      <label>Sum Assured (₹)</label>
+      <input class="form-control" id="sumAssured" type="number" placeholder="Enter sum assured">
+    </div>
+    <div class="input-container">
+      <label>Policy Term (Years)</label>
+      <input class="form-control" id="policyTerm" type="number" placeholder="Enter policy term">
+    </div>
+    <div class="input-container">
+      <label>Annual Premium (%)</label>
+      <input class="form-control" id="annualPremium" type="number" placeholder="Enter annual premium">
+    </div>
+    <div class="input-container">
+      <label>Reversionary Bonus (%)</label>
+      <input class="form-control" id="reversionaryBonus" type="number" placeholder="Enter reversionary bonus">
+    </div>
+    <div class="input-container">
+      <label>Terminal Bonus (%)</label>
+      <input class="form-control" id="terminalBonus" type="number" placeholder="Enter terminal bonus">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateInsurance()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('insuranceCalculator')">Clear</button>
+    </div>
+    <div id="ins-result" class="result-container" style="display:none;">
+      <div id="ins-output"></div>
+    </div>
+  </div>
+
+  <!-- NPV Calculator -->
+  <div id="npvCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Net Present Value Calculator</h2>
+    <div class="input-container">
+      <label>Initial Investment (₹)</label>
+      <input class="form-control" id="initialInvestment" type="number" placeholder="Enter initial investment">
+    </div>
+    <div class="input-container">
+      <label>Discount Rate (% p.a)</label>
+      <input class="form-control" id="discountRate" type="number" placeholder="Enter discount rate">
+    </div>
+    <div class="input-container">
+      <label>Cash Flows</label>
+      <div id="cashFlows"></div>
+      <button class="btn-open-calc" onclick="addCashFlow()" style="margin-top:12px;width:100%;flex:none;">+ Add Year</button>
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateNPV()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('npvCalculator')">Clear</button>
+    </div>
+    <div id="npv-result" class="result-container" style="display:none;">
+      <div><strong>NPV:</strong> <span id="npv-value">0</span></div>
+    </div>
+  </div>
+
+  <!-- ROI Calculator -->
+  <div id="roiCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">ROI Calculator</h2>
+    <div class="input-container">
+      <label>Initial Investment (₹)</label>
+      <input class="form-control" id="roiInitial" type="number" placeholder="Enter initial investment">
+    </div>
+    <div class="input-container">
+      <label>Final Value (₹)</label>
+      <input class="form-control" id="roiFinal" type="number" placeholder="Enter final value">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateROI()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('roiCalculator')">Clear</button>
+    </div>
+    <div id="roi-result" class="result-container" style="display:none;">
+      <div><strong>ROI (%):</strong> <span id="roi-value">0</span></div>
+      <div><strong>Profit:</strong> <span id="roi-profit">0</span></div>
+    </div>
+  </div>
+
+  <!-- GST Calculator -->
+  <div id="gstCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">GST Calculator</h2>
+    <div class="input-container">
+      <label>Mode</label>
+      <select class="form-control" id="gstMode">
+        <option value="exclusive">Exclusive of GST</option>
+        <option value="inclusive">Inclusive of GST</option>
+      </select>
+    </div>
+    <div class="input-container">
+      <label>Amount (₹)</label>
+      <input class="form-control" id="gstAmount" type="number" placeholder="Enter amount">
+    </div>
+    <div class="input-container">
+      <label>GST Rate (%)</label>
+      <input class="form-control" id="gstRate" type="number" placeholder="Enter GST rate">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateGST()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('gstCalculator')">Clear</button>
+    </div>
+    <div id="gst-result" class="result-container" style="display:none;">
+      <div id="gst-output"></div>
+    </div>
+  </div>
+
+  <!-- Profit Margin Calculator -->
+  <div id="profitmarginCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Profit Margin Calculator</h2>
+    <div class="input-container">
+      <label>Cost Price (₹)</label>
+      <input class="form-control" id="costPrice" type="number" placeholder="Enter cost price">
+    </div>
+    <div class="input-container">
+      <label>Selling Price (₹)</label>
+      <input class="form-control" id="sellingPrice" type="number" placeholder="Enter selling price">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateProfitMargin()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('profitmarginCalculator')">Clear</button>
+    </div>
+    <div id="pm-result" class="result-container" style="display:none;">
+      <div><strong>Profit Margin (%):</strong> <span id="pm-value">0</span></div>
+      <div><strong>Profit:</strong> <span id="pm-profit">0</span></div>
+    </div>
+  </div>
+
+  <!-- Expenditure and Savings Calculator -->
+  <div id="expsavCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Expenditure and Savings Calculator</h2>
+    <div class="input-container">
+      <label>Monthly Income (₹)</label>
+      <input class="form-control" id="monthlyIncome" type="number" placeholder="Enter monthly income">
+    </div>
+    <div class="input-container">
+      <label>Monthly Expenditure (₹)</label>
+      <input class="form-control" id="monthlyExpenditure" type="number" placeholder="Enter monthly expenditure">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateExpSav()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('expsavCalculator')">Clear</button>
+    </div>
+    <div id="es-result" class="result-container" style="display:none;">
+      <div><strong>Monthly Savings:</strong> <span id="es-savings">0</span></div>
+      <div><strong>Savings Rate (%):</strong> <span id="es-rate">0</span></div>
+    </div>
+  </div>
+
+  <!-- Credit Card Calculator -->
+  <div id="creditcardCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Credit Card Payoff Calculator</h2>
+    <div class="input-container">
+      <label>Card Balance (₹)</label>
+      <input class="form-control" id="cardBalance" type="number" placeholder="Enter card balance">
+    </div>
+    <div class="input-container">
+      <label>Annual Percentage Rate (%) APR</label>
+      <input class="form-control" id="cardAPR" type="number" placeholder="Enter APR">
+    </div>
+    <div class="input-container">
+      <label>Monthly Payment (₹)</label>
+      <input class="form-control" id="cardMonthlyPayment" type="number" placeholder="Enter monthly payment">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateCreditCard()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('creditcardCalculator')">Clear</button>
+    </div>
+    <div id="cc-result" class="result-container" style="display:none;">
+      <div><strong>Months to Pay Off:</strong> <span id="cc-months">0</span></div>
+      <div><strong>Total Interest Paid:</strong> <span id="cc-interest">0</span></div>
+    </div>
+  </div>
+
+  <!-- FD Calculator -->
+  <div id="fdCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Fixed Deposit Calculator</h2>
+    <div class="input-container">
+      <label>Principal Amount (₹)</label>
+      <input class="form-control" id="fdPrincipal" type="number" placeholder="Enter principal amount">
+    </div>
+    <div class="input-container">
+      <label>Annual Interest Rate (% p.a)</label>
+      <input class="form-control" id="fdRate" type="number" step="0.01" placeholder="Enter interest rate">
+    </div>
+    <div class="input-container">
+      <label>Time Period (Years)</label>
+      <input class="form-control" id="fdYears" type="number" placeholder="Enter time period">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateFD()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('fdCalculator')">Clear</button>
+    </div>
+    <div id="fd-result" class="result-container" style="display:none;">
+      <div><strong>Total Interest Earned:</strong> <span id="fd-interest">0</span></div>
+      <div><strong>Maturity Amount:</strong> <span id="fd-maturity">0</span></div>
+    </div>
+  </div>
+
+  <!-- RD Calculator -->
+  <div id="rdCalculator" class="calculator-section">
+    <h2 style="color:#0d47a1;margin-bottom:28px;">Recurring Deposit Calculator</h2>
+    <div class="input-container">
+      <label>Monthly Installment (₹)</label>
+      <input class="form-control" id="rdInstallment" type="number" placeholder="Enter monthly installment">
+    </div>
+    <div class="input-container">
+      <label>Annual Interest Rate (% p.a)</label>
+      <input class="form-control" id="rdRate" type="number" step="0.01" placeholder="Enter interest rate">
+    </div>
+    <div class="input-container">
+      <label>Time Period (Months)</label>
+      <input class="form-control" id="rdMonths" type="number" placeholder="Enter time period in months">
+    </div>
+    <div class="button-group-calc">
+      <button class="btn-calculate" onclick="calculateRD()">Calculate</button>
+      <button class="btn-clear" onclick="clearCalculator('rdCalculator')">Clear</button>
+    </div>
+    <div id="rd-result" class="result-container" style="display:none;">
+      <div><strong>Total Interest Earned:</strong> <span id="rd-interest">0</span></div>
+      <div><strong>Maturity Amount:</strong> <span id="rd-maturity">0</span></div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL DATA ===== -->
+  <script>
+    const modalData = {
+      'modal-mutual-fund': {
+        title: 'Mutual Fund Investment Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Investment Type:</b> Choose between SIP (Systematic Investment Plan) or LumpSum investment.</li>
+            <li><b>Monthly Investment:</b> Enter the amount you plan to invest monthly (for SIP).</li>
+            <li><b>Time Period (years):</b> Specify the number of years for the investment.</li>
+            <li><b>Expected Return Rate (p.a):</b> Enter the annual return rate you expect.</li>
+            <li><b>Calculate:</b> Computes the total investment, wealth gained, and maturity value based on inputs.</li>
+          </ol>
+        `
+      },
+      'modal-emi': {
+        title: 'EMI Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Loan Amount:</b> Enter the principal amount of the loan.</li>
+            <li><b>Interest Rate:</b> Specify the annual interest rate on the loan.</li>
+            <li><b>Loan Tenure (months):</b> Enter the loan period in months.</li>
+            <li><b>Calculate EMI:</b> Provides the monthly EMI, total payment, and total interest.</li>
+          </ol>
+        `
+      },
+      'modal-savings-goal': {
+        title: 'Savings Goal Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Goal Amount:</b> Enter your financial goal amount.</li>
+            <li><b>Current Savings:</b> Enter the amount you have already saved.</li>
+            <li><b>Monthly Savings:</b> Specify the amount you plan to save monthly.</li>
+            <li><b>Interest Rate:</b> Enter the expected annual interest rate.</li>
+            <li><b>Calculate:</b> Calculates the time needed to reach your goal.</li>
+          </ol>
+        `
+      },
+      'modal-insurance': {
+        title: 'Insurance Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Sum Assured:</b> Enter the sum assured amount.</li>
+            <li><b>Policy Term:</b> Enter the policy term in years.</li>
+            <li><b>Annual Premium:</b> Enter the annual premium percentage.</li>
+            <li><b>Reversionary Bonus:</b> Enter the reversionary bonus percentage.</li>
+            <li><b>Terminal Bonus:</b> Enter the terminal bonus percentage.</li>
+            <li><b>Calculate:</b> Calculates the insurance benefits based on the inputs.</li>
+          </ol>
+        `
+      },
+      'modal-npv': {
+        title: 'Net Present Value Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Initial Investment:</b> Enter the amount of your initial investment.</li>
+            <li><b>Discount Rate:</b> Enter the discount rate (hurdle rate) for the analysis.</li>
+            <li><b>Cash Flows:</b> Add the expected cash flows for each year of the investment.</li>
+            <li><b>Calculate NPV:</b> Computes the net present value of all future cash flows.</li>
+          </ol>
+        `
+      },
+      'modal-roi': {
+        title: 'ROI Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Initial Investment:</b> Enter the initial investment amount.</li>
+            <li><b>Final Value:</b> Enter the final value of the investment after maturity.</li>
+            <li><b>Calculate ROI:</b> Determines the return on investment percentage and profit earned.</li>
+          </ol>
+        `
+      },
+      'modal-gst': {
+        title: 'GST Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Mode Selection:</b> Choose between Exclusive (before GST) or Inclusive (after GST).</li>
+            <li><b>Amount:</b> Enter the transaction amount.</li>
+            <li><b>GST Rate:</b> Select or enter the applicable GST rate (e.g., 5%, 12%, 18%, 28%).</li>
+            <li><b>Calculate GST:</b> Computes the GST amount and total amount accordingly.</li>
+          </ol>
+        `
+      },
+      'modal-profit-margin': {
+        title: 'Profit Margin Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Cost Price:</b> Enter the cost price of the product.</li>
+            <li><b>Selling Price:</b> Enter the selling price of the product.</li>
+            <li><b>Calculate Profit Margin:</b> Computes the profit margin percentage and absolute profit amount.</li>
+          </ol>
+        `
+      },
+      'modal-exp-sav': {
+        title: 'Expenditure and Savings Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Monthly Income:</b> Enter your total monthly income.</li>
+            <li><b>Monthly Expenditure:</b> Enter your total monthly expenses.</li>
+            <li><b>Calculate:</b> Analyzes and provides your monthly savings and savings rate.</li>
+          </ol>
+        `
+      },
+      'modal-credit-card': {
+        title: 'Credit Card Payoff Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Credit Card Balance:</b> Enter your current credit card balance.</li>
+            <li><b>Annual Percentage Rate (APR):</b> Input the annual interest rate on your credit card.</li>
+            <li><b>Monthly Payment:</b> Enter the amount you can pay each month.</li>
+            <li><b>Calculate:</b> Shows how many months to pay off and total interest paid.</li>
+          </ol>
+        `
+      },
+      'modal-fd': {
+        title: 'Fixed Deposit Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Principal Amount (₹):</b> Enter your principal investment amount.</li>
+            <li><b>Annual Interest Rate (%):</b> Enter the interest rate offered by the bank.</li>
+            <li><b>Time Period (years):</b> Enter the duration of your fixed deposit.</li>
+            <li><b>Calculate:</b> Provides the total interest earned and maturity amount.</li>
+          </ol>
+        `
+      },
+      'modal-rd': {
+        title: 'Recurring Deposit Calculator',
+        content: `
+          <h3>Here's how it works:</h3>
+          <ol>
+            <li><b>Monthly Installment (₹):</b> Enter your monthly deposit amount.</li>
+            <li><b>Annual Interest Rate (%):</b> Enter the interest rate offered by the bank.</li>
+            <li><b>Time Period (months):</b> Enter the total duration in months.</li>
+            <li><b>Calculate:</b> Provides the total interest earned and maturity amount.</li>
+          </ol>
+        `
+      }
+    };
+
+    function openModal(modalId) {
+      const data = modalData[modalId];
+      if (data) {
+        document.getElementById('modal-title').textContent = data.title;
+        document.getElementById('modal-body').innerHTML = data.content;
+        document.getElementById('modal-overlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function closeModalOnOverlay(event) {
+      if (event.target === document.getElementById('modal-overlay')) {
+        closeModal();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+
+  <!-- ===== CALCULATOR FUNCTIONS ===== -->
+  <script>
+    function openCalculator(calcId) {
+      document.querySelectorAll('.calculator-section').forEach(s => s.classList.remove('active'));
+      document.getElementById(calcId).classList.add('active');
+      document.getElementById(calcId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      closeModal();
+    }
+
+    function clearCalculator(calcId) {
+      const section = document.getElementById(calcId);
+      section.querySelectorAll('input').forEach(input => input.value = '');
+      section.querySelectorAll('[id$="-result"]').forEach(el => el.style.display = 'none');
+    }
+
+    // Mutual Fund Calculator
+    function calculateMutualFund() {
+      const investment = parseFloat(document.getElementById('investment').value);
+      const years = parseFloat(document.getElementById('years').value);
+      const rate = parseFloat(document.getElementById('return-rate').value) / 100 / 12;
+
+      if (!investment || !years || !rate) {
+        alert('Please enter all values');
+        return;
       }
 
-      /* Heading Style */
-      h1 {
-        padding-top: 14vh;
-        padding-bottom: 2vh;
-        color: #ff6f00;
-        font-size: 5.1rem;
-        text-align: center;
+      const months = years * 12;
+      const maturity = investment * (((1 + rate) ** months - 1) / rate) * (1 + rate);
+      const totalInvested = investment * months;
+      const wealth = maturity - totalInvested;
+
+      document.getElementById('mf-total').textContent = '₹' + totalInvested.toFixed(2);
+      document.getElementById('mf-wealth').textContent = '₹' + wealth.toFixed(2);
+      document.getElementById('mf-maturity').textContent = '₹' + maturity.toFixed(2);
+      document.getElementById('mf-result').style.display = 'block';
+    }
+
+    // EMI Calculator
+    function calculateEMI() {
+      const principal = parseFloat(document.getElementById('loanAmount').value);
+      const rate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
+      const months = parseFloat(document.getElementById('loanTenure').value);
+
+      if (!principal || !rate || !months) {
+        alert('Please enter all values');
+        return;
       }
 
-      /* Calculator Slider */
-      .calculator-slider {
-        display: flex;
-        gap: 2vw;
-        padding: 6vh 6vw;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
+      const emi = (principal * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1);
+      const totalPayment = emi * months;
+      const totalInterest = totalPayment - principal;
+
+      document.getElementById('emi-monthly').textContent = '₹' + emi.toFixed(2);
+      document.getElementById('emi-total').textContent = '₹' + totalPayment.toFixed(2);
+      document.getElementById('emi-interest').textContent = '₹' + totalInterest.toFixed(2);
+      document.getElementById('emi-result').style.display = 'block';
+    }
+
+    // Savings Goal Calculator
+    function calculateSavingsGoal() {
+      const goal = parseFloat(document.getElementById('goalAmount').value);
+      const current = parseFloat(document.getElementById('currentSavings').value);
+      const monthly = parseFloat(document.getElementById('monthlySavings').value);
+      const rate = parseFloat(document.getElementById('savingsInterestRate').value) / 100 / 12;
+
+      if (!goal || current === undefined || !monthly || rate === undefined) {
+        alert('Please enter all values');
+        return;
       }
 
-      .slider-item {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-width: 330px;
-        max-width: 32vw;
-        padding: 2vh 1vw;
-        background: linear-gradient(135deg, #6a99ff, #0058b0);
-        color: #e0e9ff;
-        border-radius: 2rem;
-        text-align: center;
-        box-shadow: 0 0.5vh 1vw rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        scroll-snap-align: start;
+      const remaining = goal - current;
+      if (remaining <= 0) {
+        document.getElementById('sg-output').innerHTML = '<div><strong>You have already reached your goal!</strong></div>';
+        document.getElementById('sg-result').style.display = 'block';
+        return;
       }
 
-      .slider-item:hover {
-        transform: translateY(-0.8vh);
-        box-shadow: 0 1vh 2vw rgba(0, 0, 0, 0.15);
-        background: linear-gradient(135deg, #2cbc98, #0058b0);
+      let months = 0;
+      let balance = current;
+      while (balance < goal && months < 1200) {
+        balance = balance * (1 + rate) + monthly;
+        months++;
       }
 
-      .slider-item h3 {
-        font-size: 1.3rem;
-        margin: 1.5vh 1.5vw;
-        font-weight: bold;
+      const years = Math.floor(months / 12);
+      const remainingMonths = months % 12;
+
+      document.getElementById('sg-output').innerHTML = `
+        <div><strong>Time to reach goal:</strong> ${years} years and ${remainingMonths} months</div>
+        <div><strong>Total to be saved:</strong> ₹${(monthly * months).toFixed(2)}</div>
+      `;
+      document.getElementById('sg-result').style.display = 'block';
+    }
+
+    // Insurance Calculator
+    function calculateInsurance() {
+      const sumAssured = parseFloat(document.getElementById('sumAssured').value);
+      const term = parseFloat(document.getElementById('policyTerm').value);
+      const premium = parseFloat(document.getElementById('annualPremium').value);
+      const revBonus = parseFloat(document.getElementById('reversionaryBonus').value);
+      const termBonus = parseFloat(document.getElementById('terminalBonus').value);
+
+      if (!sumAssured || !term || !premium) {
+        alert('Please enter all values');
+        return;
       }
 
-      .slider-item p {
-        font-size: 1.1rem;
-        color: #e0e9ff;
+      const totalPremium = sumAssured * premium / 100 * term;
+      const revBonusAmt = sumAssured * revBonus / 100;
+      const termBonusAmt = sumAssured * termBonus / 100;
+      const totalBonus = revBonusAmt + termBonusAmt;
+      const netGain = totalBonus - totalPremium;
+
+      document.getElementById('ins-output').innerHTML = `
+        <div><strong>Total Premium Paid:</strong> ₹${totalPremium.toFixed(2)}</div>
+        <div><strong>Reversionary Bonus:</strong> ₹${revBonusAmt.toFixed(2)}</div>
+        <div><strong>Terminal Bonus:</strong> ₹${termBonusAmt.toFixed(2)}</div>
+        <div><strong>Total Bonus:</strong> ₹${totalBonus.toFixed(2)}</div>
+        <div><strong>Net Gain:</strong> ₹${netGain.toFixed(2)}</div>
+      `;
+      document.getElementById('ins-result').style.display = 'block';
+    }
+
+    // NPV Calculator
+    let cashFlowCount = 0;
+    function addCashFlow() {
+      const container = document.getElementById('cashFlows');
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'form-control';
+      input.placeholder = `Year ${cashFlowCount + 1} cash flow`;
+      input.style.marginBottom = '8px';
+      container.appendChild(input);
+      cashFlowCount++;
+    }
+
+    function calculateNPV() {
+      const initial = parseFloat(document.getElementById('initialInvestment').value);
+      const rate = parseFloat(document.getElementById('discountRate').value) / 100;
+      const inputs = document.querySelectorAll('#cashFlows input');
+
+      if (!initial || !rate || inputs.length === 0) {
+        alert('Please enter all values');
+        return;
       }
 
-      /* Common Calculator Styles */
-      .calculator-section {
-        margin: 5vh auto;
-        width: fit-content;
-        max-width: 90vw;
-        padding: 30px;
-        background: linear-gradient(5deg, hsl(325, 100%, 45%), #ff6f00);
-        border-radius: 2rem;
-        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      .input-container {
-        margin-bottom: 2.5vh;
-      }
-
-      .input-container label {
-        font-weight: bold;
-        color: #0058b0;
-        font-size: 1.1rem;
-        margin-bottom: 0.5vh;
-      }
-
-      .form-control {
-        width: 100%;
-        padding: 1.5vh 1vw;
-        border-radius: 0.6rem;
-        border: 0.1rem solid #cfd8e3;
-        background: #f9fbfd;
-        font-size: 1.1rem;
-        color: #131722;
-        transition: border-color 0.3s ease;
-        margin-bottom: 1vh;
-      }
-
-      .form-control:focus {
-        border-color: #0048ff;
-        outline: none;
-      }
-
-      .btn-calculate {
-        display: flex;
-        justify-content: center;
-        margin-top: 2vh;
-      }
-
-      .btn {
-        padding: 1.5vh 3vw;
-        border-radius: 0.6rem;
-        border: none;
-        color: white;
-        font-size: 1.1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin: 0 1vw;
-      }
-
-      .btn-calculate .btn-calculate {
-        background-color: #0048ff;
-      }
-
-      .btn-clear {
-        background-color: #ff5c5c;
-      }
-
-      .btn-clear:hover {
-        background-color: #ff6f00;
-      }
-
-      .result {
-        font-size: 1.1rem;
-        color: black;
-        font-weight: bold;
-        margin-top: 2vh;
-      }
-
-      .result-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5vh;
-        font-size: 1.1rem;
-        padding: 2vh 0;
-      }
-
-      /* Animation for Know More */
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
-      }
-
-      .know-more {
-        margin-top: auto;
-        padding-top: 1vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .know-more-btn {
-        margin-top: 1vh;
-        background-color: #e0f3ff;
-        color: #0058b0;
-        border: none;
-        padding: 1vh 2vw;
-        font-size: 1.1rem;
-        border-radius: 0.6rem;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-      }
-
-      .know-more-btn:hover {
-        background-color: #2cbc98;
-        color: white;
-        box-shadow: 0 0.5vh 1vw rgba(0, 0, 0, 0.783);
-      }
-
-      .know-more-content {
-        display: none;
-        padding: 1.5vh 1.5vw;
-        background: #f1f9ff;
-        border: 0.1rem solid #d6e6f2;
-        border-radius: 0.6rem;
-        margin-top: 1vh;
-        box-shadow: 0 0.5vh 1vw rgba(0, 0, 0, 0.1);
-        animation: fadeIn 0.3s ease-in;
-      }
-
-      .know-more-content h6 {
-        color: #0058b0;
-        font-weight: bold;
-        margin-bottom: 1vh;
-        font-size: 1.1rem;
-      }
-
-      .know-more-content ol {
-        font-size: 1rem;
-        text-align: left;
-        list-style-position: inside;
-      }
-
-      /* Mobile Responsiveness */
-      @media (max-width: 600px) {
-        .slider-item {
-          min-width: 70vw;
-          border-radius: 1rem;
-        }
-
-        .slider-item h3 {
-          font-size: 0.9rem;
-          margin: 1vh 1vw;
-        }
-
-        .slider-item p {
-          font-size: 0.6rem;
-        }
-
-        .calculator-slider {
-          padding: 2vh 2vw;
-        }
-
-        .btn-calculate {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .btn-calculate button {
-          width: 90%;
-          margin-bottom: 1vh;
-        }
-
-        .know-more-btn {
-          font-size: 0.75rem;
-        }
-
-        .know-more-content h6 {
-          font-size: 0.9rem;
-        }
-
-        .know-more-content ol {
-          font-size: 0.6rem;
-        }
-      }
-
-      /* ===============================
-   FINAL UI POLISH – OVERRIDE
-================================ */
-
-/* Calculator Card */
-.calculator-section {
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 32px;
-  box-shadow: 0 18px 45px rgba(0,0,0,0.12);
-  max-width: 520px;
-}
-
-/* Slider Cards */
-.slider-item {
-  background: linear-gradient(135deg, #eef2ff, #ffffff);
-  color: #1e293b;
-  border-radius: 22px;
-  padding: 22px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.1);
-}
-
-.slider-item h3 {
-  color: #0f172a;
-}
-
-.slider-item p {
-  color: #475569;
-}
-
-/* Inputs */
-.form-control {
-  border-radius: 14px;
-  padding: 12px 16px;
-  border: 1px solid #cbd5e1;
-}
-
-.form-control:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
-}
-
-/* Buttons */
-.btn.btn-calculate {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  border-radius: 28px;
-}
-
-.btn-clear {
-  background: #e5e7eb;
-  color: #1f2937;
-}
-
-/* Results */
-.result-container {
-  background: #f8fafc;
-  border-left: 6px solid #6366f1;
-  border-radius: 16px;
-}
-
-.result-container span {
-  color: #16a34a;
-  font-weight: bold;
-}
-
-/* Know More */
-.know-more-btn {
-  background: #eef2ff;
-  color: #4338ca;
-}
-
-.know-more-btn:hover {
-  background: #6366f1;
-  color: white;
-}
-
-    </style>
-
-    <script>// JavaScript to handle calculator toggling
-      function openCalculator(calculatorId) {
-        // Hide all calculators
-        document.querySelectorAll('.calculator-section').forEach(section => {
-          section.style.display = 'none';
-        });
-        // Show the selected calculator
-        document.getElementById(calculatorId).style.display = 'block';
-      }
-
-      document.querySelectorAll('.know-more-btn').forEach(button => {
-        button.addEventListener('click', function () {
-          const content = this.nextElementSibling;
-          content.style.display = content.style.display === 'block' ? 'none' : 'block';
-        });
+      let npv = -initial;
+      inputs.forEach((input, index) => {
+        const cf = parseFloat(input.value) || 0;
+        npv += cf / Math.pow(1 + rate, index + 1);
       });
 
-    </script>
-
-    <!-- Mutual Fund Calculator content here -->
-    <div id="mutualFundCalculator" class="calculator-section" style="display: none;">
-      <div class="switch-container radio-button">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" value="SIP" checked name="checked">
-          <label class="form-check-label" for="SIP">SIP</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="checked" value="LumpSum">
-          <label class="form-check-label" for="lumpsum">LumpSum</label>
-        </div>
-        <div class="dropdown">
-          <div class="select">
-            <span class="selected" style="color: black;">Currency</span>
-            <div class="caret"></div>
-          </div>
-          <ul class="menu">
-            <li class="currency-option">&nbsp;&#8377; &nbsp;INR</li>
-            <li class="currency-option">&#128176; USD</li>
-          </ul>
-        </div>
-      </div>
-      <div class="input-container">
-        <div>
-          <div><b>Monthly investment</b></div>
-          <div><input class="form-control" id="investment" placeholder="Enter the Monthly Investment" type="number"
-              for="amount" /></div>
-          <br />
-          <div><b>Time period (yr)</b></div>
-          <div><input class="form-control" id="years" placeholder="Enter the time period" type="number"></div>
-          <br />
-          <div><b>Expected return rate (p.a)</b></div>
-          <div><input class="form-control" id="return-rate" type="number" placeholder="Enter the Expected Return rate"
-              for="amount" /></div>
-        </div>
-      </div>
-      <br />
-      <div class="btn-calculate">
-        <button id="calculate-Btn4" type="button" class="btn btn-calculate"
-          onclick="calculateResult()">Calculate</button>
-        <button id="clearBtn3" type="button" class="btn btn-clear" onclick="clearAll()">
-          <p class="btn-text">Clear</p>
-        </button>
-      </div>
-      <br />
-      <div style="display: flex; justify-content: flex-start; font-size: medium;" class="result"><b>Result :</b>
-      </div>
-      <div style="display: flex; justify-content: center;">
-        <div class="result-container">
-          <div>Monthly Investment for <span id="mode-1">SIP- <span>Rs.</span>&nbsp;<span id="input-1"></span></div>
-          <br />
-          <br />
-          <div>Number of Years <span id="mode-2">SIP - <span>Years:</span>&nbsp;<span id="input-2"></span></div>
-          <br />
-          <br />
-          <div>Expected Rate of Return <span id="mode-3">SIP - <span>%:</span>&nbsp;<span id="input-3"></span></div>
-          <br />
-        </div>
-        <div class="result-container2">
-          <div>Total Investment</div>
-          <div><span id="currency-change-1">Rs.</span>&nbsp;<span id="total"></span></div>
-          <br />
-          <div>Wealth Gained</div>
-          <div><span id="currency-change-2">Rs.</span>&nbsp;<span id="wealth-gained"></span></div>
-          <br />
-          <div>Maturity Value</div>
-          <div><span id="currency-change-3">Rs.</span>&nbsp;<span id="maturity-value"></span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EMI Calculator content here -->
-    <div id="emiCalculator" class="calculator-section" style="display: none;">
-      <div class="input-container">
-        <div>
-          <div><b>Loan Amount (INR)</b></div>
-          <div><input class="form-control" id="loanAmount" type="number" placeholder="Enter loan amount" /></div>
-          <br />
-          <div><b>Interest Rate (%)</b></div>
-          <div><input class="form-control" id="interestRate" type="number" placeholder="Enter interest rate" />
-          </div>
-          <br />
-          <div><b>Loan Tenure (Months)</b></div>
-          <div><input class="form-control" id="loanTenure" type="number" placeholder="Enter tenure in months" />
-          </div>
-        </div>
-      </div>
-
-      <div class="btn-calculate">
-        <button id="calculate-Btn4" type="button" class="btn btn-calculate" onclick="calculateEMI()">Calculate</button>
-        <button id="clearBtn3" type="button" class="btn btn-clear" onclick="clearAll()">
-          <p class="btn-text">Clear</p>
-        </button>
-      </div>
-
-      <div class="result">
-        <div><b>Result :</b></div>
-        <div class="result-container">
-          <div>Monthly EMI: <span id="monthlyEMI"></span></div>
-          <div>Total Payment: <span id="totalPayment"></span></div>
-          <div>Total Interest Paid: <span id="totalInterestPaid"></span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Savings Goal Calculator content here -->
-    <div id="savingsGoalCalculator" class="calculator-section" style="display: none;">
-      <div class="input-container">
-        <div>
-          <div><b>Savings Goal Amount (INR)</b></div>
-          <div><input class="form-control" type="number" placeholder="Enter the amount" id="goalAmount" required />
-          </div>
-          <br />
-          <div><b>Current Savings (INR)</b></div>
-          <div><input class="form-control" type="number" placeholder="Enter the Currently Savings" id="currentSavings"
-              required /></div>
-          <br />
-          <div><b>Monthly Savings (INR)</b></div>
-          <div><input class="form-control" type="number" placeholder="Enter the MonthlySavings" id="monthlySavings"
-              required /></div>
-          <br />
-          <div><b>Interest Rate (%)</b></div>
-          <div><input class="form-control" type="number" placeholder="Enter the InterestRate" id="interestRate"
-              required /></div>
-        </div>
-      </div>
-      <br />
-      <br />
-
-      <div class="btn-calculate">
-        <button id="calculate-Btn4" type="button" class="btn btn-calculate"
-          onclick="calculateSavings()">Calculate</button>
-        <button id="clearBtn3" type="button" class="btn btn-clear" onclick="clearAll()">
-          <p class="btn-text">Clear</p>
-        </button>
-      </div>
-      <br />
-      <div style="display: flex;">
-        <div class="sresult"><b>Result:</b></div>
-        <div class="sresult-container">
-          <div class="sgresult" id="result"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Insurance Calculator content here -->
-    <div id="insuranceCalculator" class="calculator-section" style="display: none;">
-      <div class="input-container">
-        <div>
-          <div><b>Sum assured (INR)</b></div>
-          <div><input class="form-control" id="Sumassured" placeholder="Enter the Amount" type="number"
-              style="margin: 1% 5% 0 0" /></div>
-          <br />
-          <div><b>Policy term (Years)</b></div>
-          <div><input class="form-control" id="Policyterm" placeholder="Enter the time period" type="number" />
-          </div>
-          <br />
-          <div><b>Annual premium (%)</b></div>
-          <div><input class="form-control" id="Annualpremium" placeholder="Enter the Annualpremium" type="number" />
-          </div>
-          <br />
-          <div><b>Reversionary Bonus (%)</b></div>
-          <div><input class="form-control" id="ReversionaryBonus" placeholder="Enter the ReversionaryBonus"
-              type="number" /></div>
-          <br />
-          <div><b>Terminal Bonus (%)</b></div>
-          <div><input class="form-control" id="TerminalBonus" placeholder="Enter the time TerminalBonus"
-              type="number" /></div>
-          <br />
-
-
-          <div class="select" style="display: flex; flex-direction: row; width: 100%;">
-            <div class="centered-content">
-              <input name="surrenderType" id="surrendered" type="radio" />
-              <label for="surrendered"><b>Early Surrendered</b></label>
-            </div>
-            <br />
-            <div class="centered-content">
-              <input name="surrenderType" id="death" type="radio" />
-              <label for="death"><b>Policyholder's Death</b></label>
-            </div>
-          </div>
-          <br />
-        </div>
-      </div>
-      <br />
-      <div class="btn-calculate"
-        style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-        <button type="button" id="calculateBtn" onclick="calculateInsurance()"
-          style="margin-right: 10px;">Calculate</button>
-        <button class="button" type="button" id="clearBtn" onclick="clearInsurance()">Clear</button>
-      </div>
-      <br />
-      <div style="display: flex; flex-direction: column;">
-        <div class="result"><b>Result :</b></div>
-        <p id="ReversionaryBonusAmt" class="pb-2"></p>
-        <p id="TerminalBonusAmt" class="pb-2"></p>
-        <p id="TotalBonus" class="pb-2"></p>
-        <p id="TotalPremium" class="pb-2"></p>
-        <p id="netGain" class="pb-2"></p>
-      </div>
-    </div>
-
-    <!-- Npv Calculator content here -->
-    <div id="npvCalculator" class="calculator-section" style="display: none;">
-      <div class="input-container">
-        <div>
-          <div><b>Initial Investment (INR)</b></div>
-          <div><input class="form-control" id="initialInvestment" placeholder="Enter the Initial Investment"
-              type="number" style="margin: 1% 5% 0 0" /></div>
-          <br />
-          <div><b>Discount Rate (%)</b></div>
-          <div><input class="form-control" id="discountRate" placeholder="Enter the DiscountRate" type="number" />
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="cash-flows-container">
-        <div><b>Cash Flow</b></div>
-        <div id="cashFlows">
-          <!-- Cash flow inputs will be added here dynamically -->
-        </div>
-        <div class="npv-calculate">
-          <button type="button" onclick="addCashFlow()">+ Add Year</button>
-        </div>
-      </div>
-      <br />
-      <div class="btn-calculate">
-        <button class="btn btn-calculate" type="button" onclick="calculateNPV()">Calculate</button>
-        <button class="btn btn-secondary" type="button" onclick="clearNPV()">
-          <p class="btn-text">Clear</p>
-        </button>
-      </div>
-      <br />
-      <div style="display: flex;">
-        <div class="nresult"><b>Result :</b></div>
-        <div class="nresult-container">
-          <div>NPV</div>
-          <div><span id="NPV_result">Rs.</span>&nbsp;<span id="npvResult"></span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ROI Calculator content here -->
-    <div id="roiCalculator" class="calculator-section" style="display: none;">
-      <div class="input-container">
-        <form id="roi-form" style="justify-content: center; align-items: center;">
-          <div class="form-group">
-            <label for="invested">
-              <b>Total Amount Invested (Rs):</b>
-            </label>
-            <input class="form-control" type="number" id="invested" name="invested" required>
-          </div>
-          <div class="form-group">
-            <label for="return">
-              <b>Total Amount Returned (Rs):</b>
-            </label>
-            <input class="form-control" type="number" id="return" name="return" required>
-          </div>
-          <div class="btn-calculate">
-            <button id="calculate-Btn4" type="button" class="btn btn-calculate"
-              onclick="calculateEMI()">Calculate</button>
-            <button id="clearBtn3" type="button" class="btn btn-clear" onclick="clearROI()">
-              <p class="btn-text">Clear</p>
-            </button>
-          </div>
-
-        </form>
-        <div class="calculation">
-          <b>Result:</b>
-          <div class="ans">
-            <div id="gl" class="gl" style="font-size: 20px;"></div>
-            <div id="result" class="roi" style="font-size: 20px; padding-top: 10px;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- GST Calculator content here -->
-    <div id="gstCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="gst-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div class="form-group">
-              <label for="mode" class="mode">Mode:</label>
-              <select id="mode" class="form-control">
-                <option value="exclusive">Exclusive of GST</option>
-                <option value="inclusive">Inclusive of GST</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="amount" class="amount">Amount:</label>
-              <input type="number" id="amount" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="tax-slab" class="tax-slab">Tax Slab (%):</label>
-              <input type="number" id="tax-slab" class="form-control" required>
-            </div>
-
-            <div class="btn-calculate">
-              <button id="calculate-Btn4" type="button" class="btn btn-calculate"
-                onclick="calculate()">Calculate</button>
-              <button id="clearBtn3" type="button" class="btn btn-clear" onclick="clearGST()">
-                <p class="btn-text">Clear</p>
-              </button>
-            </div>
-
-          </form>
-          <div id="result" class="mt-3">
-            <h5>Result:</h5>
-            <p id="total-gst"></p>
-            <p id="post-gst-amount"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Profit Margin Calculator content here -->
-    <div id="profitmarginCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="profit-margin-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div class="form-group">
-              <label for="cost" class="cost">Cost Price:</label>
-              <input type="number" id="cost" placeholder="Enter the CostPrice" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="selling-price" class="selling-price">Selling Price:</label>
-              <input type="number" id="selling-price" placeholder="Enter the Selling Price" class="form-control"
-                required>
-            </div>
-            <div class="btn-calculate" style="display: flex; flex-direction: row;">
-              <button id="submitBtn" type="submit" class="btn btn-calculate">Calculate</button>
-              <button type="button" class="btn btn-secondary" onclick="clearProfitMargin()">
-                <p class="btn-text">Clear</p>
-              </button>
-            </div>
-          </form>
-          <div id="result" class="mt-3">
-            <h5>Result:</h5>
-            <p id="profit-margin"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Expenditure and Saving Calculator content here -->
-    <div id="expsavCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="expenditure-savings-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div class="form-group">
-              <label for="monthly-income" class="income">Monthly Income:</label>
-              <input type="number" id="monthly-income" class="form-control" placeholder="Enter your income" required>
-            </div>
-            <div class="form-group">
-              <label for="monthly-expenditure" class="income">Monthly Expenditure:</label>
-              <input type="number" id="monthly-expenditure" class="form-control" placeholder="Enter your expenditure"
-                required>
-            </div>
-            <div class="btn-calculate" style="display: flex; flex-direction: row;">
-              <button id="calculateBtn" type="button" class="btn btn-calculate">Calculate</button>
-              <button id="clearBtn" type="button" class="btn btn-clear">
-                <p class="btn-text">Clear</p>
-              </button>
-            </div>
-          </form>
-          <div id="result-savings" class="mt-3">
-            <h5>Result:</h5>
-            <p>Your Savings: $<span id="savingsAmount">0.00</span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- gdp Calculator content here -->
-    <div id="gdpCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="GDPcalc"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <fieldset>
-              <legend>Expenditure Approach</legend>
-              <div class="form-group">
-                <label for="personal" class="cost">Personal Consumption:</label>
-                <input type="number" id="personal" placeholder="Enter the PersonalConsumption" class="form-control"
-                  required>
-              </div>
-              <div class="form-group">
-                <label for="investment" class="selling-price">Gross Investment:</label>
-                <input type="number" id="investment1" placeholder="Enter the GrossInvestment" class="form-control"
-                  required>
-              </div>
-              <div class="form-group">
-                <label for="consumption" class="cost">Government Consumption:</label>
-                <input type="number" id="consumption" placeholder="Enter the Government Consumption"
-                  class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="exports" class="selling-price">Exports:</label>
-                <input type="number" id="exports" placeholder="Enter the Exports" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="imports" class="cost">Imports:</label>
-                <input type="number" id="imports" placeholder="Enter the Imports" class="form-control" required>
-              </div>
-              <div class="btn-calculate">
-                <button id="calculate-Btn4" type="button" class="btn btn-calculate"
-                  onclick="calculateGDP()">Calculate</button>
-                <button id="clearBtn3" type="button" class="btn btn-clear" onclick="clearAll()">
-                  <p class="btn-text">Clear</p>
-                </button>
-              </div>
-            </fieldset>
-          </form>
-          <div id="result" class="mt-3">
-            <h5>Result:</h5>
-            <p id="gdp-result"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- swp Calculator content here -->
-    <div id="swpCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="systematic-withdrawal-plan-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <fieldset>
-              <div class="form-group">
-                <label for="totalInvestment">Total Investment:</label>
-                <input type="number" id="totalInvestment" class="form-control"
-                  placeholder="Enter total investment amount" required>
-              </div>
-              <div class="form-group">
-                <label for="withdrawalPerMonth">Withdrawal Per Month:</label>
-                <input type="number" id="withdrawalPerMonth" class="form-control"
-                  placeholder="Enter withdrawal per month" required>
-              </div>
-              <div class="form-group">
-                <label for="expectedReturnRate">Expected Return Rate (p.a):</label>
-                <input type="number" id="expectedReturnRate" class="form-control"
-                  placeholder="Enter Expected Return Rate" required>
-              </div>
-              <div class="form-group">
-                <label for="totalPeriod">Total Period (in years):</label>
-                <input type="number" id="totalPeriod" class="form-control" placeholder="Enter time period in years"
-                  required>
-              </div>
-              <div class="btn-calculate">
-                <button id="calculate-Btn4" type="button" class="btn btn-calculate"
-                  onclick="calculateResult()">Calculate</button>
-                <button id="clearBtn3" type="button" class="btn btn-clear" onclick="clearAll()">
-                  <p class="btn-text">Clear</p>
-                </button>
-              </div>
-            </fieldset>
-          </form>
-          <div id="result-swp" class="mt-3">
-            <h5>Result:</h5>
-            <p>Your Remaining Amount: <span id="remainingAmount"></span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- creditcard Calculator content here -->
-    <div id="creditcardCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="credit-card-payoff-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <fieldset>
-              <div class="form-group">
-                <label for="balance" class="income">Credit Card Balance:</label>
-                <input type="number" id="balance" class="form-control" placeholder="Enter your balance (in ₹)" required>
-              </div>
-              <div class="form-group">
-                <label for="apr" class="income">Annual Percentage Rate (APR):</label>
-                <input type="number" id="apr" class="form-control" placeholder="Enter APR (in %)" required>
-              </div>
-              <div class="form-group">
-                <label for="monthly-payment" class="income">Monthly Payment:</label>
-                <input type="number" id="monthly-payment" class="form-control"
-                  placeholder="Enter monthly payment (in ₹)" required>
-              </div>
-              <div class="btn-calculate" style="display: flex; flex-direction: row;">
-                <button id="calculateBtn" type="button" class="btn btn-calculate">Calculate</button>
-                <button id="clearBtn" type="button" class="btn btn-clear">
-                  <p class="btn-text">Clear</p>
-                </button>
-              </div>
-            </fieldset>
-          </form>
-          <div id="result-payoff" class="mt-3">
-            <h5>Result:</h5>
-            <p>Months to Pay Off: <span id="monthsToPayOff"></span></p>
-            <p>Total Interest Paid: <span id="totalInterestPaid"></span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  
-  
-
-    <!-- fd Calculator content here -->
-    <div id="fdCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="fixed-deposit-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <fieldset>
-              <div class="form-group">
-                <label for="principal">Principal Amount (₹):</label>
-                <input type="number" id="principal" placeholder="Enter Principal Amount" required>
-              </div>
-              <div class="form-group">
-                <label for="rate">Annual Interest Rate (%):</label>
-                <input type="number" id="rate" step="0.01" placeholder="Enter Annual Interest Rate" required>
-              </div>
-              <div class="form-group">
-                <label for="years">Time Period (in years):</label>
-                <input type="number" id="years1" placeholder="Enter Time Period" required>
-              </div>
-              <div class="btn-calculate">
-                <button id="calculateBtn2" type="button" class="btn btn-calculate">Calculate</button>
-                <button id="clearBtn1" type="button" class="btn btn-clear">
-                  <p class="btn-text">Clear</p>
-                </button>
-              </div>
-            </fieldset>
-          </form>
-          <div id="result-fd" class="mt-3">
-            <h5>Result:</h5>
-            <p>Total Interest Earned: <span id="interestEarned"></span></p>
-            <p>Total Maturity Amount: <span id="maturityAmount"></span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- rd Calculator content here -->
-    <div id="rdCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="recurring-deposit-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <fieldset>
-              <div class="form-group">
-                <label for="monthly-installment">Monthly Installment (₹):</label>
-                <input type="number" id="monthly-installment" placeholder="Enter Monthly Installment" required>
-              </div>
-              <div class="form-group">
-                <label for="rate">Annual Interest Rate (%):</label>
-                <input type="number" id="rate1" step="0.01" placeholder="Enter Annual Interest Rate" required>
-              </div>
-              <div class="form-group">
-                <label for="months">Time Period (in months):</label>
-                <input type="number" id="months1" placeholder="Enter Time Period" required>
-              </div>
-              <div class="btn-calculate">
-                <button id="calculate-Btn3" type="button" class="btn btn-calculate">Calculate</button>
-                <button id="clearBtn2" type="button" class="btn btn-clear">
-                  <p class="btn-text">Clear</p>
-                </button>
-              </div>
-            </fieldset>
-          </form>
-          <div id="result-rd" class="mt-3">
-            <h5>Result:</h5>
-            <p>Total Interest Earned: <span id="interestEarned1"></span></p>
-            <p>Total Maturity Amount: <span id="maturityAmount1"></span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- epf Calculator content here -->
-    <div id="epfCalculator" class="calculator-section" style="display: none;">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="epf-calculator"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <fieldset>
-              <div class="form-group">
-                <label for="salary">Monthly Salary (Basic + DA): </label>
-                <input type="number" id="salary" name="salary" placeholder="Enter Your Monthly Salary" required>
-              </div>
-              <div class="form-group">
-                <label for="age">Your Age: </label>
-                <input type="number" id="age" name="age" placeholder="Enter Your Age" required>
-              </div>
-              <div class="form-group">
-                <label for="contribution">Your Contribution to EPF (%): </label>
-                <input type="number" id="contribution" name="contribution" placeholder="Enter Your Contribution to EPF"
-                  required>
-              </div>
-              <div class="form-group">
-                <label for="increase">Annual Increase in Salary (%): </label>
-                <input type="number" id="increase" name="increase" placeholder="Enter Your Annual Increase in Salary"
-                  required>
-              </div>
-              <div class="form-group">
-                <label for="rate">Rate of Interest (%): </label>
-                <input type="number" id="rate2" name="rate" placeholder="Enter Rate of Interest" required>
-              </div>
-              <div class="btn-calculate">
-                <button id="calculate-Btn4" type="button" class="btn btn-calculate">Calculate</button>
-                <button id="clearBtn3" type="button" class="btn btn-clear">
-                  <p class="btn-text">Clear</p>
-                </button>
-              </div>
-            </fieldset>
-          </form>
-          <div id="result-rd" class="mt-3">
-            <h5>Result:</h5>
-            <p>Total EPF at retirement: <span id="totalEPF"></span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    </div>
-
-    <body>
-
-
-
-
-
-      <div class="tco-container">
-        <h1 class="tco-header">TCO Calculator</h1>
-
-        <div class="input-group">
-          <label for="initialCost">Initial Cost ($):</label>
-          <input type="number" id="initialCost" placeholder="Enter initial cost" required>
-        </div>
-
-        <div class="input-group">
-          <label for="operatingCost">Annual Operating Cost ($):</label>
-          <input type="number" id="operatingCost" placeholder="Enter annual operating cost" required>
-        </div>
-
-        <div class="input-group">
-          <label for="years">Years of Ownership:</label>
-          <input type="number" id="years" placeholder="Enter number of years" required>
-        </div>
-
-        <div class="input-group">
-          <label for="miscCost">Miscellaneous Costs ($):</label>
-          <input type="number" id="miscCost" placeholder="Enter miscellaneous costs" required>
-        </div>
-
-        <button class="btn calculate-btn" onclick="calculateTCO()">Calculate TCO</button>
-
-        <div class="result" id="tcoResult"></div>
-      </div>
-
-      <main class="main-income">
-        <h1 class="main-income-head">Income Tax Calculator</h1>
-        <form>
-          <p class="disclaimer" id="disclaimer">*Must have AIS and TIS with yourself</p>
-
-          <div class="input-group">
-            <label for="actual-income" class="income-label">Total Income:</label>
-            <input type="number" placeholder="Enter your total income" id="actual-income">
-          </div>
-
-          <div class="input-group">
-            <label for="actual-deductions" class="income-label">Total Deductions:</label>
-            <input type="number" placeholder="Enter your total deductions" id="actual-deductions">
-          </div>
-
-          <div class="input-group">
-            <label for="pan-number" class="income-label">PAN Card Number:</label>
-            <input type="password" placeholder="Enter your PAN card" id="pan-number">
-          </div>
-
-          <div class="button-group">
-            <button type="button" class="btn submit-button" onclick="tax_evaluation()">Calculate</button>
-            <button type="button" class="btn reset-button">Clear</button>
-          </div>
-        </form>
-
-        <p class="taxable-income" id="taxable-income">Taxable income: <strong id="taxable-income-value"></strong></p>
-        <p class="tax-payable" id="tax-payable">Tax Payable: <strong id="tax-payable-value"></strong></p>
-        <p class="income-after-tax" id="income-after-tax">Income After Tax: <strong id="income-after-value"></strong>
-        </p>
-      </main>
-
-      <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-
-        :root {
-          --font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
-
-        .tco-container,
-        .main-income {
-          background: linear-gradient(135deg, #0048ff 20%, #2cbc98 80%);
-          padding: 20px;
-          border-radius: 10px;
-          margin: 20px auto;
-          text-align: center;
-          width: 90%;
-          max-width: 500px;
-        }
-
-        .tco-header,
-        .main-income-head {
-          color: #ffffff;
-          font-size: 24px;
-          margin-bottom: 20px;
-        }
-
-        .input-group {
-          margin-bottom: 15px;
-          text-align: left;
-          width: 90%;
-          margin: auto;
-        }
-
-        .input-group label {
-          color: #ffffff;
-          display: block;
-          font-size: 18px;
-          margin-bottom: 5px;
-        }
-
-        .input-group input {
-          width: 100%;
-          padding: 10px;
-          border-radius: 5px;
-          font-size: 16px;
-        }
-
-        .calculate-btn,
-        .submit-button,
-        .reset-button {
-          background: linear-gradient(135deg, #0048ff, #2cbc98);
-          color: #ffffff;
-          border: none;
-          border-radius: 10px;
-          padding: 10px 20px;
-          font-size: 18px;
-          margin-top: 20px;
-        }
-
-        .result,
-        .taxable-income,
-        .tax-payable,
-        .income-after-tax {
-          color: #ffffff;
-          font-size: 20px;
-          margin-top: 20px;
-        }
-
-        .button-group {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-          margin-top: 20px;
-        }
-
-        @media (max-width: 600px) {
-
-          .tco-container,
-          .main-income {
-            width: 100%;
-          }
-        }
-      </style>
-
-
-      <!--End of Income Tax Calc-->
-
-
-
-
-
-
-
-
-    </body>
-
-
-    <style>
-      /* Container for form input and button */
-      .subscribe-form {
-        display: flex;
-        flex-direction: row;
-        /* Positions the input and button side by side */
-        gap: 10px;
-        /* Adds space between input and button */
-        align-items: center;
-        /* Ensures both input and button are aligned vertically */
+      document.getElementById('npv-value').textContent = '₹' + npv.toFixed(2);
+      document.getElementById('npv-result').style.display = 'block';
+    }
+
+    // ROI Calculator
+    function calculateROI() {
+      const initial = parseFloat(document.getElementById('roiInitial').value);
+      const final = parseFloat(document.getElementById('roiFinal').value);
+
+      if (!initial || !final) {
+        alert('Please enter all values');
+        return;
       }
 
-      #unique-news-email {
-        flex: 1;
-        /* Allows the input to take up the available width */
-        padding: 10px;
-        /* Adds padding inside the input box */
-        font-size: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        outline: none;
+      const profit = final - initial;
+      const roi = (profit / initial) * 100;
+
+      document.getElementById('roi-value').textContent = roi.toFixed(2) + '%';
+      document.getElementById('roi-profit').textContent = '₹' + profit.toFixed(2);
+      document.getElementById('roi-result').style.display = 'block';
+    }
+
+    // GST Calculator
+    function calculateGST() {
+      const amount = parseFloat(document.getElementById('gstAmount').value);
+      const rate = parseFloat(document.getElementById('gstRate').value);
+      const mode = document.getElementById('gstMode').value;
+
+      if (!amount || !rate) {
+        alert('Please enter all values');
+        return;
       }
 
-      #unique-subscribe-btn {
-        padding: 10px 20px;
-        font-size: 1rem;
-        font-weight: bold;
-        color: #fff;
-        background-color: #ff6b6b;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+      let gstAmount, finalAmount;
+      if (mode === 'exclusive') {
+        gstAmount = (amount * rate) / 100;
+        finalAmount = amount + gstAmount;
+      } else {
+        finalAmount = amount;
+        gstAmount = (amount * rate) / (100 + rate);
       }
 
-      #unique-subscribe-btn:hover {
-        background-color: #ff4b4b;
-      }
-    </style>
+      document.getElementById('gst-output').innerHTML = `
+        <div><strong>Original Amount:</strong> ₹${(finalAmount - gstAmount).toFixed(2)}</div>
+        <div><strong>GST Amount:</strong> ₹${gstAmount.toFixed(2)}</div>
+        <div><strong>Final Amount:</strong> ₹${finalAmount.toFixed(2)}</div>
+      `;
+      document.getElementById('gst-result').style.display = 'block';
+    }
 
+    // Profit Margin Calculator
+    function calculateProfitMargin() {
+      const cost = parseFloat(document.getElementById('costPrice').value);
+      const selling = parseFloat(document.getElementById('sellingPrice').value);
 
-    <!-- Timed popup that will appear after succesful submission of feebback form! -->
-    <button class="notification" id="successnotification" style="display:none;">
-      <span class="message" id="successmsg">Submitted successfully!</span>
-      <span class="closenotif" id="closeSuccessNotification">✖</span>
-      <div class="timerline" id="timerline"></div>
-    </button>
-
-    
-   
-
-<div class="gtranslate_wrapper"></div>
-<script>window.gtranslateSettings = { "default_language": "en", "detect_browser_language": true, "wrapper_selector": ".gtranslate_wrapper" }</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
-<a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
-
-
-    <script src="./assets/js/subscribe.js"></script>
-    <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="../assets/js/vendor/modernizr-3.7.1.min.js"></script>
-    <script src="../assets/js/popper.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins.js"></script>
-    <script src="../assets/js/slick.min.js"></script>
-    <script src="../assets/js/ajax-contact.js"></script>
-    <script src="../assets/js/waypoints.min.js"></script>
-    <script src="../assets/js/jquery.counterup.min.js"></script>
-    <script src="../assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="../assets/js/jquery.easing.min.js"></script>
-    <script src="../assets/js/scrolling-nav.js"></script>
-    <script src="../assets/js/wow.min.js"></script>
-    <script src="../assets/js/particles.min.js"></script>
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/popup.js"></script>
-    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-    <script src="https://mediafiles.botpress.cloud/5e160793-5606-4412-ba4c-337e416f14fe/webchat/config.js"
-      defer></script>
-    <script defer src="./assets/js/arthsathi-style.js"></script>
-    <script src="./assets/js/botpress.js"></script>
-    <script>
-      // Get the modals
-      var loginModal = document.getElementById('myModal');
-      var registerModal = document.getElementById('registerModal');
-
-      // Get the button that opens the login modal
-      var loginBtn = document.getElementById('loginBtn');
-
-      // Get the links that open the register and login modals
-      var registerLink = document.getElementById('registerLink');
-      var loginLink = document.getElementById('loginLink');
-
-      // Get the <span> elements that close the modals
-      var closeBtns = document.getElementsByClassName('close');
-
-      //show and hide icon button
-      document.addEventListener('DOMContentLoaded', () => {
-        const togglePasswordButtons = document.querySelectorAll('.toggle-password-btn');
-
-        togglePasswordButtons.forEach(button => {
-          button.addEventListener('click', () => {
-            const passwordInput = button.previousElementSibling;
-            if (passwordInput.type === 'password') {
-              passwordInput.type = 'text';
-              button.innerHTML = `<i class="fa-solid fa-eye-slash"></i>`
-            } else {
-              passwordInput.type = 'password';
-              button.innerHTML = `<i class="fa-solid fa-eye"></i>`
-            }
-          });
-        });
-      });
-
-
-      // When the user clicks the register link, open the register modal
-      registerLink.onclick = function (event) {
-        event.preventDefault();
-        loginModal.style.display = 'none';
-        registerModal.style.display = 'block';
+      if (!cost || !selling) {
+        alert('Please enter all values');
+        return;
       }
 
-      // When the user clicks the login link, open the login modal
-      loginLink.onclick = function (event) {
-        event.preventDefault();
-        registerModal.style.display = 'none';
-        loginModal.style.display = 'block';
+      const profit = selling - cost;
+      const margin = (profit / selling) * 100;
+
+      document.getElementById('pm-value').textContent = margin.toFixed(2) + '%';
+      document.getElementById('pm-profit').textContent = '₹' + profit.toFixed(2);
+      document.getElementById('pm-result').style.display = 'block';
+    }
+
+    // Expenditure and Savings Calculator
+    function calculateExpSav() {
+      const income = parseFloat(document.getElementById('monthlyIncome').value);
+      const expenditure = parseFloat(document.getElementById('monthlyExpenditure').value);
+
+      if (!income || !expenditure) {
+        alert('Please enter all values');
+        return;
       }
 
-      // When the user clicks on <span> (x), close the modal
-      for (var i = 0; i < closeBtns.length; i++) {
-        closeBtns[i].onclick = function () {
-          loginModal.style.display = 'none';
-          registerModal.style.display = 'none';
-        }
+      const savings = income - expenditure;
+      const rate = (savings / income) * 100;
+
+      document.getElementById('es-savings').textContent = '₹' + savings.toFixed(2);
+      document.getElementById('es-rate').textContent = rate.toFixed(2) + '%';
+      document.getElementById('es-result').style.display = 'block';
+    }
+
+    // Credit Card Calculator
+    function calculateCreditCard() {
+      const balance = parseFloat(document.getElementById('cardBalance').value);
+      const apr = parseFloat(document.getElementById('cardAPR').value) / 100 / 12;
+      const payment = parseFloat(document.getElementById('cardMonthlyPayment').value);
+
+      if (!balance || !apr || !payment) {
+        alert('Please enter all values');
+        return;
       }
 
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function (event) {
-        if (event.target == loginModal) {
-          loginModal.style.display = 'none';
-        }
-        if (event.target == registerModal) {
-          registerModal.style.display = 'none';
-        }
-      }
-      function openModal() {
-        var modal = document.getElementById("myModal");
-        modal.style.display = "block";
-        document.title = "Login/Register - FinVeda";  // Update the title when modal is opened
+      let months = 0;
+      let tempBalance = balance;
+      let totalInterest = 0;
+
+      while (tempBalance > 0 && months < 600) {
+        const interest = tempBalance * apr;
+        totalInterest += interest;
+        tempBalance = tempBalance + interest - payment;
+        months++;
       }
 
-      function closeModal() {
-        var modal = document.getElementById("myModal");
-        modal.style.display = "none";
-        document.title = "FinVeda";  // Revert the title back when modal is closed
+      document.getElementById('cc-months').textContent = months;
+      document.getElementById('cc-interest').textContent = '₹' + totalInterest.toFixed(2);
+      document.getElementById('cc-result').style.display = 'block';
+    }
+
+    // FD Calculator
+    function calculateFD() {
+      const principal = parseFloat(document.getElementById('fdPrincipal').value);
+      const rate = parseFloat(document.getElementById('fdRate').value) / 100;
+      const years = parseFloat(document.getElementById('fdYears').value);
+
+      if (!principal || !rate || !years) {
+        alert('Please enter all values');
+        return;
       }
 
-      window.onclick = function (event) {
-        var modal = document.getElementById("myModal");
-        if (event.target == modal) {
-          closeModal(); // Call closeModal function
-        }
-      };
+      const maturity = principal * Math.pow(1 + rate, years);
+      const interest = maturity - principal;
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const registerModal = document.getElementById("registerModal");
-        const loginModal = document.getElementById("myModal");
-        const registerLink = document.getElementById("registerLink");
-        const loginLink = document.getElementById("loginLink");
+      document.getElementById('fd-interest').textContent = '₹' + interest.toFixed(2);
+      document.getElementById('fd-maturity').textContent = '₹' + maturity.toFixed(2);
+      document.getElementById('fd-result').style.display = 'block';
+    }
 
-        // Event listener for the register link
-        registerLink.addEventListener("click", function (event) {
-          event.preventDefault();
-          loginModal.style.display = "none";
-          registerModal.style.display = "block";
-          document.title = "Login/Register - FinVeda";  // Update title when registering
-        });
+    // RD Calculator
+    function calculateRD() {
+      const installment = parseFloat(document.getElementById('rdInstallment').value);
+      const rate = parseFloat(document.getElementById('rdRate').value) / 100 / 12;
+      const months = parseFloat(document.getElementById('rdMonths').value);
 
-        // Event listener for the login link
-        loginLink.addEventListener("click", function (event) {
-          event.preventDefault();
-          registerModal.style.display = "none";
-          loginModal.style.display = "block";
-          document.title = "Login/Register - FinVeda";  // Update title when logging in
-        });
+      if (!installment || !rate || !months) {
+        alert('Please enter all values');
+        return;
+      }
 
-        // Close button event listeners for modals
-        registerModal.querySelector(".close").addEventListener("click", closeModal);
-        loginModal.querySelector(".close").addEventListener("click", closeModal);
-      });
+      const maturity = installment * (((1 + rate) ** months - 1) / rate) * (1 + rate);
+      const totalInvested = installment * months;
+      const interest = maturity - totalInvested;
 
+      document.getElementById('rd-interest').textContent = '₹' + interest.toFixed(2);
+      document.getElementById('rd-maturity').textContent = '₹' + maturity.toFixed(2);
+      document.getElementById('rd-result').style.display = 'block';
+    }
+  </script>
 
-    </script>
-    <script src="./smoothScroll.js"></script>
-  </body>
-
+  <script src="../assets/js/subscribe.js"></script>
+  <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
 </html>
